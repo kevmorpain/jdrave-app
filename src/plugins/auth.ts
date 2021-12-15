@@ -22,8 +22,16 @@ import { NavigationGuardNext, RouteLocation } from "vue-router";
 
 const AuthKey = Symbol("auth") as InjectionKey<AuthPlugin>;
 
+interface AuthState {
+  loading: boolean;
+  isAuthenticated: boolean;
+  user: unknown;
+  popupOpen: boolean;
+  error: unknown;
+}
+
 let client!: Auth0Client;
-const state = reactive({
+const state = reactive<AuthState>({
   loading: true,
   isAuthenticated: false,
   user: {},
@@ -83,12 +91,14 @@ const loginWithRedirect = (o?: RedirectLoginOptions): Promise<void> => {
 };
 
 /** Returns all the claims present in the ID token */
-const getIdTokenClaims = (o?: GetIdTokenClaimsOptions): Promise<IdToken> => {
+const getIdTokenClaims = (
+  o?: GetIdTokenClaimsOptions
+): Promise<IdToken | undefined> => {
   return client.getIdTokenClaims(o);
 };
 
 /** Returns the access token. If the token is invalid or missing, a new one is retrieved */
-const getTokenSilently = (o?: GetTokenSilentlyOptions): Promise<unknown> => {
+const getTokenSilently = (o?: GetTokenSilentlyOptions): Promise<string> => {
   return client.getTokenSilently(o);
 };
 
@@ -98,7 +108,7 @@ const getTokenWithPopup = (o?: GetTokenWithPopupOptions): Promise<string> => {
 };
 
 /** Logs the user out and removes their session on the authorization server */
-const logout = (o?: LogoutOptions): void => {
+const logout = (o?: LogoutOptions): void | Promise<void> => {
   return client.logout(o);
 };
 
@@ -107,7 +117,7 @@ export interface AuthPlugin {
   loading: boolean;
   user: {};
   getIdTokenClaims: (o?: GetIdTokenClaimsOptions) => Promise<IdToken>;
-  getTokenSilently: (o?: GetTokenSilentlyOptions) => Promise<unknown>;
+  getTokenSilently: (o?: GetTokenSilentlyOptions) => Promise<string>;
   getTokenWithPopup: (o?: GetTokenWithPopupOptions) => Promise<string>;
   handleRedirectCallback: () => Promise<void>;
   loginWithRedirect: (o?: RedirectLoginOptions) => Promise<void>;

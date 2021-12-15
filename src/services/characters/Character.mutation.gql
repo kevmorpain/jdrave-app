@@ -1,0 +1,8 @@
+mutation CharacterMutation($characterId: uuid!, $name: String, $features: jsonb, $maxHp: Int) {
+  update_characters_by_pk(pk_columns: {id: $characterId}, _set: {name: $name, features: $features, max_hp: $maxHp}) {
+    id
+    name
+    features
+    maxHp: max_hp
+  }
+}

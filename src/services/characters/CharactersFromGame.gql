@@ -1,0 +1,11 @@
+query CharactersFromGame($gameId: uuid!) {
+  characters(where: {game_id: {_eq: $gameId}}) {
+    id
+    name
+    features
+    maxHp: max_hp
+  }
+  game: games_by_pk(id: $gameId) {
+    title
+  }
+}

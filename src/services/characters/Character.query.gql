@@ -1,0 +1,8 @@
+query CharacterQuery($characterId: uuid!) {
+  character: characters_by_pk(id: $characterId) {
+    id
+    name
+    features
+    maxHp: max_hp
+  }
+}

@@ -2,10 +2,10 @@ import { createApp, h, provide } from "vue";
 import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
-import store from "./store";
 import { DefaultApolloClient } from "@vue/apollo-composable";
-import apolloClient from "@/api";
+import apolloClient from "@/api/apollo";
 import { createAuthPlugin, setupAuthPlugin } from "@/api/auth";
+import "@/assets/style.css";
 
 const app = createApp({
   setup() {
@@ -14,9 +14,7 @@ const app = createApp({
   render() {
     return h(App);
   }
-})
-  .use(store)
-  .use(router);
+}).use(router);
 
 setupAuthPlugin().then(() => {
   const auth = createAuthPlugin();
