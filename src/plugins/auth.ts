@@ -115,7 +115,7 @@ const logout = (o?: LogoutOptions): void | Promise<void> => {
 export interface AuthPlugin {
   isAuthenticated: boolean;
   loading: boolean;
-  user: {};
+  user: unknown;
   getIdTokenClaims: (o?: GetIdTokenClaimsOptions) => Promise<IdToken>;
   getTokenSilently: (o?: GetTokenSilentlyOptions) => Promise<string>;
   getTokenWithPopup: (o?: GetTokenWithPopupOptions) => Promise<string>;

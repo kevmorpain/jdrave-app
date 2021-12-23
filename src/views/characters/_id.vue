@@ -34,7 +34,7 @@ import DeleteCharacter from "@/services/characters/DeleteCharacter.mutation.gql"
 import { useRouter } from "vue-router";
 
 export default defineComponent({
-  name: "Character",
+  name: "CharacterPage",
   props: {
     characterId: {
       type: String,

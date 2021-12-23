@@ -33,7 +33,7 @@ import { useQuery, useResult } from "@vue/apollo-composable";
 import CharactersFromGame from "@/services/characters/CharactersFromGame.gql";
 
 export default defineComponent({
-  name: "Game",
+  name: "GamePage",
   props: ["gameId"],
   setup(props) {
     const { result, loading } = useQuery(CharactersFromGame, () => ({

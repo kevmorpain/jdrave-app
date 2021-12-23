@@ -34,7 +34,7 @@ import InsertCharacter from "@/services/characters/InsertCharacter.gql";
 import CharactersFromGame from "@/services/characters/CharactersFromGame.gql";
 
 export default defineComponent({
-  name: "Character",
+  name: "CharacterCreation",
   props: {
     gameId: {
       type: String,

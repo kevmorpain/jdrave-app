@@ -12,7 +12,7 @@
 import { defineComponent } from "vue";
 import { useAuth } from "@/plugins/auth";
 export default defineComponent({
-  name: "Login",
+  name: "LoginPage",
   setup() {
     const auth = useAuth();
 

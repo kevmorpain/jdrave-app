@@ -5,13 +5,16 @@
 
   <ul v-else>
     <router-link
-      tag="li"
       :to="{ name: 'game', params: { gameId: game.id } }"
       v-for="game in games"
       :key="game.id"
+      custom
+      v-slot="{ navigate }"
     >
-      <p>{{ game.title }}</p>
-      <p>{{ game.description }}</p>
+      <li @click="navigate">
+        <p>{{ game.title }}</p>
+        <p>{{ game.description }}</p>
+      </li>
     </router-link>
   </ul>
 </template>
@@ -22,7 +25,7 @@ import { GET_GAMES } from "@/services/games";
 import { useQuery, useResult } from "@vue/apollo-composable";
 
 export default defineComponent({
-  name: "Games",
+  name: "GamesList",
   setup() {
     const { result, loading } = useQuery(GET_GAMES);
     const games = useResult(result, [], data => data.games);

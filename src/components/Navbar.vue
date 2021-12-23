@@ -13,8 +13,10 @@
     </ul>
 
     <div v-if="!auth.loading">
-      <button v-if="auth.isAuthenticated" @click="logout">Se connecter</button>
-      <button v-else @click="login">Se déconnecter</button>
+      <button v-if="auth.isAuthenticated" @click="logout">
+        Se déconnecter
+      </button>
+      <button v-else @click="login">Se connecter</button>
     </div>
   </nav>
 </template>
@@ -25,7 +27,7 @@ import { useAuth } from "@/plugins/auth";
 import apolloClient from "@/api/apollo";
 
 export default defineComponent({
-  name: "Navbar",
+  name: "CustomNavbar",
   setup() {
     const links = ref([
       {
