@@ -28,16 +28,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { useQuery, useResult } from "@vue/apollo-composable";
-import CharactersFromGame from "@/services/characters/CharactersFromGame.gql";
+import { defineComponent } from 'vue';
+import { useQuery, useResult } from '@vue/apollo-composable';
+import CharactersFromGame from '@/services/characters/CharactersFromGame.gql';
 
 export default defineComponent({
-  name: "GamePage",
-  props: ["gameId"],
+  name: 'GamePage',
+  props: ['gameId'],
   setup(props) {
     const { result, loading } = useQuery(CharactersFromGame, () => ({
-      gameId: props.gameId
+      gameId: props.gameId,
     }));
     const characters = useResult(result, [], data => data.characters);
     const game = useResult(result, [], data => data.game);
@@ -45,8 +45,8 @@ export default defineComponent({
     return {
       loading,
       characters,
-      game
+      game,
     };
-  }
+  },
 });
 </script>

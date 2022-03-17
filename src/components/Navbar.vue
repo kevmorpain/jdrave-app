@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar">
-    <ul>
+    <ul class="flex">
       <router-link
         v-for="{ name, text } in links"
         custom
@@ -22,22 +22,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watchEffect } from "vue";
-import { useAuth } from "@/plugins/auth";
-import apolloClient from "@/api/apollo";
+import { defineComponent, ref, watchEffect } from 'vue';
+import { useAuth } from '@/plugins/auth';
+import apolloClient from '@/api/apollo';
 
 export default defineComponent({
-  name: "CustomNavbar",
+  name: 'CustomNavbar',
   setup() {
     const links = ref([
       {
-        name: "home",
-        text: "Accueil"
+        name: 'home',
+        text: 'Accueil',
       },
       {
-        name: "games",
-        text: "Jeux"
-      }
+        name: 'games',
+        text: 'Jeux',
+      },
     ]);
 
     const auth = useAuth();
@@ -47,14 +47,14 @@ export default defineComponent({
 
     const logout = () => {
       auth.logout({
-        returnTo: window.location.origin
+        returnTo: window.location.origin,
       });
     };
 
     watchEffect(async () => {
-      if (auth.isAuthenticated && !localStorage.getItem("authToken")) {
+      if (auth.isAuthenticated && !localStorage.getItem('authToken')) {
         const token = await auth.getTokenSilently();
-        localStorage.setItem("authToken", token);
+        localStorage.setItem('authToken', token);
         apolloClient.resetStore();
       }
     });
@@ -63,31 +63,27 @@ export default defineComponent({
       links,
       auth,
       login,
-      logout
+      logout,
     };
-  }
+  },
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="postcss" scoped>
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @apply flex justify-between items-center border-b;
   padding: 1rem 4rem;
   border-bottom: 1px solid gray;
 
   ul {
-    display: flex;
-    margin: 0;
+    @apply flex m-0;
 
     li {
-      margin: 0;
+      @apply m-0 hover:cursor-pointer;
       padding: 0.5rem 1rem;
 
       &:hover {
         color: green;
-        cursor: pointer;
       }
     }
   }

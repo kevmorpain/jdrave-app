@@ -27,26 +27,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
-import { useMutation } from "@vue/apollo-composable";
-import { useRouter } from "vue-router";
-import InsertCharacter from "@/services/characters/InsertCharacter.gql";
-import CharactersFromGame from "@/services/characters/CharactersFromGame.gql";
+import { defineComponent, reactive } from 'vue';
+import { useMutation } from '@vue/apollo-composable';
+import { useRouter } from 'vue-router';
+import InsertCharacter from '@/services/characters/InsertCharacter.gql';
+import CharactersFromGame from '@/services/characters/CharactersFromGame.gql';
 
 export default defineComponent({
-  name: "CharacterCreation",
+  name: 'CharacterCreation',
   props: {
     gameId: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   setup(props) {
     const newCharacter = reactive({
-      name: "",
-      features: "{}",
+      name: '',
+      features: '{}',
       maxHp: 0,
-      maxMp: 0
+      maxMp: 0,
     });
 
     const { mutate: createCharacter, onDone: onCreationDone } = useMutation(
@@ -54,38 +54,38 @@ export default defineComponent({
       () => ({
         variables: {
           gameId: props.gameId,
-          ...newCharacter
+          ...newCharacter,
         },
         update: (cache, { data: { createCharacter } }) => {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const data: any = cache.readQuery({
             query: CharactersFromGame,
             variables: {
-              gameId: props.gameId
-            }
+              gameId: props.gameId,
+            },
           });
           console.log(createCharacter);
           console.log(data);
           data.characters.push(createCharacter);
           cache.writeQuery({ query: CharactersFromGame, data });
-        }
+        },
       })
     );
 
     const router = useRouter();
     onCreationDone(({ data }): void => {
       router.replace({
-        name: "character",
+        name: 'character',
         params: {
-          characterId: data.character.id
-        }
+          characterId: data.character.id,
+        },
       });
     });
 
     return {
       newCharacter,
-      createCharacter
+      createCharacter,
     };
-  }
+  },
 });
 </script>

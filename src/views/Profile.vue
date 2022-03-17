@@ -9,16 +9,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { useAuth } from "@/plugins/auth";
+import { defineComponent } from 'vue';
+import { useAuth } from '@/plugins/auth';
 export default defineComponent({
-  name: "LoginPage",
+  name: 'LoginPage',
   setup() {
     const auth = useAuth();
 
     return {
-      auth
+      auth,
     };
-  }
+  },
 });
 </script>

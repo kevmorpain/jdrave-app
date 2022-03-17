@@ -8,19 +8,19 @@ import createAuth0Client, {
   LogoutOptions,
   PopupConfigOptions,
   PopupLoginOptions,
-  RedirectLoginOptions
-} from "@auth0/auth0-spa-js";
+  RedirectLoginOptions,
+} from '@auth0/auth0-spa-js';
 import {
   App,
   computed,
   inject,
   InjectionKey,
   reactive,
-  watchEffect
-} from "vue";
-import { NavigationGuardNext, RouteLocation } from "vue-router";
+  watchEffect,
+} from 'vue';
+import { NavigationGuardNext, RouteLocation } from 'vue-router';
 
-const AuthKey = Symbol("auth") as InjectionKey<AuthPlugin>;
+const AuthKey = Symbol('auth') as InjectionKey<AuthPlugin>;
 
 interface AuthState {
   loading: boolean;
@@ -36,7 +36,7 @@ const state = reactive<AuthState>({
   isAuthenticated: false,
   user: {},
   popupOpen: false,
-  error: null
+  error: null,
 });
 
 const setUser = async (): Promise<void> => {
@@ -154,7 +154,7 @@ const authPlugin = {
     const auth = this;
     app.config.globalProperties.$auth = reactive(auth);
     app.provide(AuthKey, reactive(auth));
-  }
+  },
 };
 
 export const setupAuth = async (
@@ -162,14 +162,14 @@ export const setupAuth = async (
   onRedirectCallback: (appState: { targetUrl: RouteLocation }) => void
 ) => {
   client = await createAuth0Client({
-    ...options
+    ...options,
   });
 
   try {
     // If the user is returning to the app after authentication
     if (
-      window.location.search.includes("code=") &&
-      window.location.search.includes("state=")
+      window.location.search.includes('code=') &&
+      window.location.search.includes('state=')
     ) {
       // handle the redirect and retrieve tokens
       const { appState } = await client.handleRedirectCallback();

@@ -1,23 +1,23 @@
-import { GET_GAMES } from "@/services/games";
+import { GET_GAMES } from '@/services/games';
 import {
   ApolloClient,
   ApolloLink,
   createHttpLink,
   InMemoryCache,
-  concat
-} from "@apollo/client/core";
+  concat,
+} from '@apollo/client/core';
 
 // HTTP connection to the API
 const httpLink = createHttpLink({
-  uri: "https://jdrave.hasura.app/v1/graphql"
+  uri: 'https://jdrave.hasura.app/v1/graphql',
 });
 
 const authMiddleware = new ApolloLink((operation, forward) => {
-  const token = localStorage.getItem("authToken");
+  const token = localStorage.getItem('authToken');
   operation.setContext({
     headers: {
-      authorization: token ? `Bearer ${token}` : null
-    }
+      authorization: token ? `Bearer ${token}` : null,
+    },
   });
   return forward(operation);
 });
@@ -30,7 +30,7 @@ const apolloClient = new ApolloClient({
   link: concat(authMiddleware, httpLink),
   cache,
   typeDefs: [GET_GAMES],
-  resolvers: {}
+  resolvers: {},
 });
 
 export default apolloClient;
