@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Lato:wght@400;700&display=swap');
+
+@tailwind base;
+
+@layer base {
+  body {
+    @apply text-dark font-primary;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    @apply text-primary;
+  }
+}
+
+@tailwind components;
+@tailwind utilities;
+
+.page-title {
+  @apply font-secondary underline text-4xl text-center decoration-primary underline-offset-2;
+
+  span {
+    @apply text-primary;
+  }
+}

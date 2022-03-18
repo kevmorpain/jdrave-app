@@ -1,24 +1,16 @@
 <template>
-  <Navbar />
-  <router-view />
+  <Layout>
+    <router-view />
+  </Layout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Navbar from '@/components/Navbar.vue';
+import Layout from '@/components/layouts/Default.vue';
 
 export default defineComponent({
   components: {
-    Navbar,
+    Layout,
   },
 });
 </script>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
-</style>

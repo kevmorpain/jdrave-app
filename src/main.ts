@@ -5,7 +5,8 @@ import router from './router';
 import { DefaultApolloClient } from '@vue/apollo-composable';
 import apolloClient from '@/api/apollo';
 import { createAuthPlugin, setupAuthPlugin } from '@/api/auth';
-import '@/assets/style.pcss';
+import '@/assets/style.scss';
+import registerComponents from '@/components/base';
 
 const app = createApp({
   setup() {
@@ -15,6 +16,8 @@ const app = createApp({
     return h(App);
   },
 }).use(router);
+
+registerComponents(app);
 
 setupAuthPlugin().then(() => {
   const auth = createAuthPlugin();

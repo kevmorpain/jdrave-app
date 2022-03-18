@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar">
-    <ul class="flex">
+    <ul>
       <router-link
         v-for="{ name, text } in links"
         custom
@@ -13,10 +13,10 @@
     </ul>
 
     <div v-if="!auth.loading">
-      <button v-if="auth.isAuthenticated" @click="logout">
+      <BaseButton v-if="auth.isAuthenticated" @click="logout">
         Se déconnecter
-      </button>
-      <button v-else @click="login">Se connecter</button>
+      </BaseButton>
+      <BaseButton v-else @click="login">Se connecter</BaseButton>
     </div>
   </nav>
 </template>
@@ -69,22 +69,15 @@ export default defineComponent({
 });
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .navbar {
-  @apply flex justify-between items-center border-b;
-  padding: 1rem 4rem;
-  border-bottom: 1px solid gray;
+  @apply flex justify-between items-center border-b bg-primary text-white py-4 px-16;
 
   ul {
     @apply flex m-0;
 
     li {
-      @apply m-0 hover:cursor-pointer;
-      padding: 0.5rem 1rem;
-
-      &:hover {
-        color: green;
-      }
+      @apply m-0 hover:cursor-pointer py-2 px-4 hover:text-secondary transition-colors duration-200 ease-out;
     }
   }
 }

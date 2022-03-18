@@ -1,15 +1,14 @@
 <template>
-  <header>
-    <h1>{{ character.name }}</h1>
-    <button @click="deleteCharacter">Supprimer</button>
+  <header class="flex justify-between align-middle mb-8">
+    <h1 class="page-title" v-html="title" />
+    <BaseButton class="warning" @click="deleteCharacter">Supprimer</BaseButton>
   </header>
 
   <p v-if="loading">Character is loading</p>
 
   <div v-else>
     <div>
-      <label>Nom</label>
-      <input v-model="name" />
+      <BaseInput label="Nom" v-model="name" />
     </div>
     <div>
       <label>PV</label>
@@ -21,17 +20,18 @@
       <textarea v-model="features" />
     </div>
 
-    <button @click="updateCharacter">Validate</button>
+    <button @click="updateCharacter">Update</button>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watchEffect } from 'vue';
+import { computed, defineComponent, ref, watchEffect } from 'vue';
 import { useMutation, useQuery, useResult } from '@vue/apollo-composable';
 import CharacterQuery from '@/services/characters/Character.query.gql';
 import CharacterMutation from '@/services/characters/Character.mutation.gql';
 import DeleteCharacter from '@/services/characters/DeleteCharacter.mutation.gql';
 import { useRouter } from 'vue-router';
+import { useFormattedTitle } from '@/utils/title';
 
 export default defineComponent({
   name: 'CharacterPage',
@@ -51,10 +51,14 @@ export default defineComponent({
     }));
     const character = useResult(result, {}, data => data.character);
 
+    let title = computed(() => '');
+
     watchEffect(() => {
-      name.value = character.value.name;
+      name.value = character.value.name || '';
       features.value = JSON.stringify(character.value.features);
       maxHp.value = character.value.maxHp;
+
+      title = useFormattedTitle(name);
     });
 
     const { mutate: updateCharacter } = useMutation(CharacterMutation, () => ({
@@ -93,6 +97,7 @@ export default defineComponent({
       maxHp,
       updateCharacter,
       deleteCharacter,
+      title,
     };
   },
 });
