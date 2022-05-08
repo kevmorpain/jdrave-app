@@ -1,16 +1,17 @@
 <template>
   <button
-    class="bg-white rounded-full py-2 px-4 text-primary hover:bg-slate-50 transition-colors duration-200 ease-out"
+    class="bg-white rounded-full py-2 px-4 text-primary hover:bg-slate-50 transition-colors duration-200 ease-out inline-flex items-center font-medium"
+    :disabled="isLoading"
   >
+    <BaseSpinner v-if="isLoading" class="inline w-4 h-4 mr-3" />
     <slot />
   </button>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-export default defineComponent({
-  name: 'BaseButton',
-});
+<script setup lang="ts">
+defineProps<{
+  isLoading?: boolean;
+}>();
 </script>
 
 <style lang="scss" scoped>

@@ -11,7 +11,7 @@ module.exports = {
         'white-opacity': '#FFFFFFCC',
       },
       fontFamily: {
-        primary: ['Lato', 'Arial', 'sans-serif'],
+        primary: ['Nunito', 'Arial', 'sans-serif'],
         secondary: ['Caveat', 'serif'],
       },
     },

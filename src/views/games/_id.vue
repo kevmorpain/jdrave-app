@@ -17,7 +17,7 @@
 
   <ul v-else class="grid gap-14 grid-cols-4">
     <router-link
-      v-for="character in characters"
+      v-for="character in sortedCharacters"
       :to="{ name: 'character', params: { characterId: character.id } }"
       :key="character.id"
       custom
@@ -25,7 +25,8 @@
     >
       <li @click="navigate">
         <article
-          class="bg-white rounded shadow-md hover:bg-slate-50 hover:cursor-pointer transition-colors duration-200 ease-in-out relative overflow-hidden min-h-[180px] flex"
+          class="bg-white rounded shadow-md hover:bg-slate-50 hover:cursor-pointer transition-colors duration-200 ease-in-out relative overflow-hidden min-h-[180px] flex bg-center bg-cover"
+          :style="{ backgroundImage: `url(${character.picture})` }"
         >
           <div class="absolute bg-secondary top-0 right-0 p-[2px] rounded-bl">
             <IcCharacter />
@@ -43,7 +44,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, Ref } from 'vue';
+import { computed, defineComponent } from 'vue';
 import { useQuery, useResult } from '@vue/apollo-composable';
 import CharactersFromGame from '@/services/characters/CharactersFromGame.gql';
 import IcCharacter from '@/components/icons/IcCharacter.vue';
@@ -68,9 +69,15 @@ export default defineComponent({
 
     let title = useFormattedTitle(gameTitle);
 
+    const sortedCharacters = computed(() =>
+      [...characters.value].sort((characterA, characterB) =>
+        characterA.name.localeCompare(characterB.name)
+      )
+    );
+
     return {
       loading,
-      characters,
+      sortedCharacters,
       title,
     };
   },

@@ -4,5 +4,7 @@ query CharacterQuery($characterId: uuid!) {
     name
     features
     maxHp: max_hp
+    currentHp: current_hp
+    picture
   }
 }
