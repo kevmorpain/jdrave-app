@@ -1,6 +1,6 @@
 {
-  "domain": "jdrave.eu.auth0.com",
-  "client_id": "VfaNMw0Qu9HTgT9gvd4i74HWtdw2DAeE",
-  "redirect_uri": "http://localhost:8080",
-  "audience": "https://jdrave.eu.auth0.com/api/v2/"
+  "domain": "jdrave-app.eu.auth0.com",
+  "client_id": "1HcsSfcNhxQvUogLS6hHzjNCiKvAnssW",
+  "redirect_uri": "https://kevmorpain.github.io/jdrave-app/",
+  "audience": "https://jdrave-app.eu.auth0.com/api/v2/"
 }
