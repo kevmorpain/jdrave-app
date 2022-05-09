@@ -1,37 +1,42 @@
 <template>
-  <h1>Création de personnage</h1>
+  <header class="flex justify-between align-middle mb-8">
+    <h1 class="page-title" v-html="title" />
+  </header>
 
   <div>
-    <div>
-      <label>Nom</label>
-      <input v-model="newCharacter.name" />
-    </div>
+    <BaseInput label="Nom" v-model="newCharacter.name" />
 
-    <div>
-      <label>PV max</label>
-      <input v-model="newCharacter.maxHp" type="number" min="0" />
-    </div>
+    <BaseInput
+      label="PV max"
+      type="number"
+      min="0"
+      v-model="newCharacter.maxHp"
+    />
 
-    <div>
-      <label>PM max</label>
-      <input v-model="newCharacter.maxMp" type="number" min="0" />
-    </div>
+    <BaseInput
+      label="PV max"
+      type="number"
+      min="0"
+      v-model="newCharacter.maxMp"
+    />
 
-    <div>
-      <label>Features</label>
-      <textarea v-model="newCharacter.features" />
-    </div>
+    <BaseTextarea
+      class="col-span-full"
+      label="Features"
+      v-model="newCharacter.features"
+    />
 
-    <button @click="createCharacter">Valider</button>
+    <BaseButton class="primary" @click="createCharacter">Valider</BaseButton>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, reactive, ref } from 'vue';
 import { useMutation } from '@vue/apollo-composable';
 import { useRouter } from 'vue-router';
 import InsertCharacter from '@/services/characters/InsertCharacter.gql';
 import CharactersFromGame from '@/services/characters/CharactersFromGame.gql';
+import { useFormattedTitle } from '@/utils/title';
 
 export default defineComponent({
   name: 'CharacterCreation',
@@ -82,9 +87,12 @@ export default defineComponent({
       });
     });
 
+    const title = ref<string>('Création de personnage');
+
     return {
       newCharacter,
       createCharacter,
+      title: useFormattedTitle(title),
     };
   },
 });
