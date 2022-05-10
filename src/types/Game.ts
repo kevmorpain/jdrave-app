@@ -3,4 +3,5 @@ export default interface IGame {
   title: string;
   description: string;
   picture_url: string;
+  created_at: string;
 }

@@ -7,8 +7,10 @@ module.exports = {
         'primary-hover': '#796387',
         secondary: '#FBBE9D',
         'secondary-hover': '#fab189',
+        tertiary: '#ECE2D0',
         dark: '#231C07',
         'white-opacity': '#FFFFFFCC',
+        hero: '#231C074D',
       },
       fontFamily: {
         primary: ['Nunito', 'Arial', 'sans-serif'],
@@ -22,6 +24,9 @@ module.exports = {
       },
       maxWidth: {
         hero: '956px',
+      },
+      boxShadow: {
+        hero: '-2px -2px 2px',
       },
     },
   },
