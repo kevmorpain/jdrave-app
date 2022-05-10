@@ -1,16 +1,9 @@
 <template>
-  <Layout>
+  <Component :is="$route.name === 'home' ? 'div' : Layout">
     <router-view />
-  </Layout>
+  </Component>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 import Layout from '@/components/layouts/Default.vue';
-
-export default defineComponent({
-  components: {
-    Layout,
-  },
-});
 </script>

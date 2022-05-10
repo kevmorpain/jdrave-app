@@ -16,7 +16,8 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'home',
-    component: () => import(/* webpackChunkName: "Home" */ '@/views/Home.vue'),
+    component: () =>
+      import(/* webpackChunkName: "home" */ '@/views/HomeView.vue'),
   },
   ...prefixRoutes('/games', [
     {

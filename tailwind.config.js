@@ -14,6 +14,15 @@ module.exports = {
         primary: ['Nunito', 'Arial', 'sans-serif'],
         secondary: ['Caveat', 'serif'],
       },
+      fontSize: {
+        '4.5xl': ['2.5rem', '1.4'],
+      },
+      zIndex: {
+        1: '1',
+      },
+      maxWidth: {
+        hero: '956px',
+      },
     },
   },
   plugins: [],

@@ -1,6 +1,6 @@
 <template>
   <header class="flex justify-between align-middle mb-8">
-    <h1 class="page-title" v-html="title" />
+    <h1 class="page-title">Création de <span>personnage</span></h1>
   </header>
 
   <div>
@@ -31,12 +31,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue';
+import { defineComponent, reactive } from 'vue';
 import { useMutation } from '@vue/apollo-composable';
 import { useRouter } from 'vue-router';
 import InsertCharacter from '@/services/characters/InsertCharacter.gql';
 import CharactersFromGame from '@/services/characters/CharactersFromGame.gql';
-import { useFormattedTitle } from '@/utils/title';
 
 export default defineComponent({
   name: 'CharacterCreation',
@@ -87,12 +86,9 @@ export default defineComponent({
       });
     });
 
-    const title = ref<string>('Création de personnage');
-
     return {
       newCharacter,
       createCharacter,
-      title: useFormattedTitle(title),
     };
   },
 });

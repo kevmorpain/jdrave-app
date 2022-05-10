@@ -2,7 +2,7 @@
   <nav class="navbar">
     <ul>
       <router-link
-        v-for="{ name, text } in links"
+        v-for="{ name, text } in filteredLinks"
         custom
         :to="{ name }"
         :key="name"
@@ -21,51 +21,49 @@
   </nav>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, watchEffect } from 'vue';
+<script setup lang="ts">
+import { computed, ref, watchEffect } from 'vue';
 import { useAuth } from '@/plugins/auth';
 import apolloClient from '@/api/apollo';
 
-export default defineComponent({
-  name: 'CustomNavbar',
-  setup() {
-    const links = ref([
-      {
-        name: 'home',
-        text: 'Accueil',
-      },
-      {
-        name: 'games',
-        text: 'Jeux',
-      },
-    ]);
-
-    const auth = useAuth();
-    const login = () => {
-      auth.loginWithRedirect();
-    };
-
-    const logout = () => {
-      auth.logout({
-        returnTo: window.location.origin,
-      });
-    };
-
-    watchEffect(async () => {
-      if (auth.isAuthenticated && !localStorage.getItem('authToken')) {
-        const token = await auth.getTokenSilently();
-        localStorage.setItem('authToken', token);
-        apolloClient.resetStore();
-      }
-    });
-
-    return {
-      links,
-      auth,
-      login,
-      logout,
-    };
+const links = ref([
+  {
+    name: 'home',
+    text: 'Accueil',
+    needAuth: false,
   },
+  {
+    name: 'games',
+    text: 'Jeux',
+    needAuth: true,
+  },
+]);
+
+const auth = useAuth();
+const login = () => {
+  auth.loginWithRedirect();
+};
+
+const filteredLinks = computed(() => {
+  if (auth.isAuthenticated) {
+    return links.value;
+  } else {
+    return links.value.filter(link => link.needAuth === false);
+  }
+});
+
+const logout = () => {
+  auth.logout({
+    returnTo: window.location.origin,
+  });
+};
+
+watchEffect(async () => {
+  if (auth.isAuthenticated && !localStorage.getItem('authToken')) {
+    const token = await auth.getTokenSilently();
+    localStorage.setItem('authToken', token);
+    apolloClient.resetStore();
+  }
 });
 </script>
 

@@ -6,6 +6,7 @@ const GET_GAMES = gql`
       id
       title
       description
+      picture_url
     }
   }
 `;

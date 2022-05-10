@@ -34,6 +34,7 @@ import { defineComponent } from 'vue';
 import { GET_GAMES } from '@/services/games';
 import { useQuery, useResult } from '@vue/apollo-composable';
 import IcQuest from '@/components/icons/IcQuest.vue';
+import IGamesQuery from '@/types/services/games/GamesQuery.interface';
 
 export default defineComponent({
   name: 'GamesList',
@@ -41,7 +42,7 @@ export default defineComponent({
     IcQuest,
   },
   setup() {
-    const { result, loading } = useQuery(GET_GAMES);
+    const { result, loading } = useQuery<IGamesQuery>(GET_GAMES);
     const games = useResult(result, [], data => data.games);
 
     return {
