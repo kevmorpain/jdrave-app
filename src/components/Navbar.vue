@@ -22,9 +22,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watchEffect } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useAuth } from '@/plugins/auth';
-import apolloClient from '@/api/apollo';
+import { apolloClient, updateApolloClientHeaders } from '@/plugins/apollo';
 
 const links = ref([
   {
@@ -58,13 +58,18 @@ const logout = () => {
   });
 };
 
-watchEffect(async () => {
-  if (auth.isAuthenticated && !localStorage.getItem('authToken')) {
-    const token = await auth.getTokenSilently();
-    localStorage.setItem('authToken', token);
-    apolloClient.resetStore();
-  }
-});
+watch(
+  () => auth.isAuthenticated,
+  async () => {
+    if (auth.isAuthenticated) {
+      console.log('update token');
+      const token = await auth.getTokenSilently();
+      updateApolloClientHeaders(token);
+      apolloClient.resetStore();
+    }
+  },
+  { immediate: true }
+);
 </script>
 
 <style lang="scss" scoped>

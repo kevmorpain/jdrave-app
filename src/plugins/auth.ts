@@ -20,9 +20,9 @@ import {
 } from 'vue';
 import { NavigationGuardNext, RouteLocation } from 'vue-router';
 
-const AuthKey = Symbol('auth') as InjectionKey<AuthPlugin>;
+const AuthKey = Symbol('auth') as InjectionKey<IAuthPlugin>;
 
-interface AuthState {
+interface IAuthState {
   loading: boolean;
   isAuthenticated: boolean;
   user: unknown;
@@ -31,7 +31,7 @@ interface AuthState {
 }
 
 let client!: Auth0Client;
-const state = reactive<AuthState>({
+const state = reactive<IAuthState>({
   loading: true,
   isAuthenticated: false,
   user: {},
@@ -98,7 +98,9 @@ const getIdTokenClaims = (
 };
 
 /** Returns the access token. If the token is invalid or missing, a new one is retrieved */
-const getTokenSilently = (o?: GetTokenSilentlyOptions): Promise<string> => {
+export const getTokenSilently = (
+  o?: GetTokenSilentlyOptions
+): Promise<string> => {
   return client.getTokenSilently(o);
 };
 
@@ -112,7 +114,7 @@ const logout = (o?: LogoutOptions): void | Promise<void> => {
   return client.logout(o);
 };
 
-export interface AuthPlugin {
+export interface IAuthPlugin {
   isAuthenticated: boolean;
   loading: boolean;
   user: unknown;
@@ -179,9 +181,9 @@ export const setupAuth = async (
       // (useful for retrieving any pre-authentication state)
       onRedirectCallback(appState);
     }
-  } catch (e) {
-    console.error(e);
-    state.error = e;
+  } catch (error) {
+    console.error(error);
+    state.error = error;
   } finally {
     // Initialize our internal authentication state
     state.isAuthenticated = await client.isAuthenticated();
@@ -222,7 +224,7 @@ export const createAuthPlugin = () => {
   return authPlugin;
 };
 
-export function useAuth(): AuthPlugin {
+export function useAuth(): IAuthPlugin {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   return inject(AuthKey)!;
 }

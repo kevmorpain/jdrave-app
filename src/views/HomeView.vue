@@ -1,11 +1,9 @@
 <template>
-  <Navbar class="fixed z-10 w-full mb-12" />
-
   <p v-if="loading">Chargement...</p>
 
-  <template v-else>
+  <div v-else class="-mx-10 -mt-[70px]">
     <div
-      class="hero relative bg-center bg-cover h-[500px] flex flex-col justify-end before:content-['e'] before:absolute before:inset-0 before:bg-primary before:bg-opacity-70 overflow-hidden"
+      class="hero relative bg-center bg-cover h-[500px] flex flex-col justify-end before:content-[''] before:absolute before:inset-0 before:bg-primary before:bg-opacity-70 overflow-hidden"
       :style="`background-image: url(${games[0].picture_url})`"
     >
       <div class="w-full mx-[243px] relative">
@@ -30,11 +28,10 @@
         </p>
       </div>
     </div>
-  </template>
+  </div>
 </template>
 
 <script setup lang="ts">
-import Navbar from '@/components/Navbar.vue';
 import PrismIcon from '@/components/icons/PrismIcon.vue';
 import { GET_GAMES } from '@/services/games';
 import { useQuery, useResult } from '@vue/apollo-composable';

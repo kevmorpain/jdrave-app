@@ -1,19 +1,11 @@
 <template>
-  <Navbar class="mb-12" />
+  <Navbar class="fixed z-10 w-full" />
 
-  <section class="max-w-screen-xl m-auto px-10">
+  <section class="max-w-screen-xl m-auto px-10 pt-[70px]">
     <slot />
   </section>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 import Navbar from '@/components/Navbar.vue';
-
-export default defineComponent({
-  name: 'DefaultLayout',
-  components: {
-    Navbar,
-  },
-});
 </script>

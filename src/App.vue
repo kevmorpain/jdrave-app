@@ -1,7 +1,7 @@
 <template>
-  <Component :is="$route.name === 'home' ? 'div' : Layout">
+  <Layout>
     <router-view />
-  </Component>
+  </Layout>
 </template>
 
 <script setup lang="ts">
