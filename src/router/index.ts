@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import { authGuard } from '@/plugins/auth';
 
 function prefixRoutes(
   prefix: string,
@@ -49,13 +48,6 @@ const routes: RouteRecordRaw[] = [
     props: true,
     component: () =>
       import(/* webpackChunkName: "characters" */ '@/views/characters/_id.vue'),
-  },
-  {
-    path: '/profile',
-    name: 'profile',
-    component: () =>
-      import(/* webpackChunkName: "profile" */ '@/views/Profile.vue'),
-    beforeEnter: authGuard,
   },
 ];
 

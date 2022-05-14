@@ -12,19 +12,18 @@
       </router-link>
     </ul>
 
-    <div v-if="!auth.loading">
-      <BaseButton v-if="auth.isAuthenticated" @click="logout">
+    <div v-if="!isLoading">
+      <BaseButton v-if="isAuthenticated" @click="handleLogout">
         Se déconnecter
       </BaseButton>
-      <BaseButton v-else @click="login">Se connecter</BaseButton>
+      <BaseButton v-else @click="handleLogin">Se connecter</BaseButton>
     </div>
   </nav>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
-import { useAuth } from '@/plugins/auth';
-import { apolloClient, updateApolloClientHeaders } from '@/plugins/apollo';
+import { computed, ref } from 'vue';
+import { useAuth0 } from '@auth0/auth0-vue';
 
 const links = ref([
   {
@@ -39,37 +38,25 @@ const links = ref([
   },
 ]);
 
-const auth = useAuth();
-const login = () => {
-  auth.loginWithRedirect();
-};
+const { loginWithRedirect, logout, isAuthenticated, isLoading } = useAuth0();
+
+const handleLogin = () => loginWithRedirect();
 
 const filteredLinks = computed(() => {
-  if (auth.isAuthenticated) {
+  if (isAuthenticated.value) {
     return links.value;
   } else {
     return links.value.filter(link => link.needAuth === false);
   }
 });
 
-const logout = () => {
-  auth.logout({
-    returnTo: window.location.origin,
+const handleLogout = () =>
+  logout({
+    returnTo:
+      process.env.NODE_ENV === 'production'
+        ? 'https://kevmorpain.github.io/jdrave-app'
+        : 'http://localhost:8080',
   });
-};
-
-watch(
-  () => auth.isAuthenticated,
-  async () => {
-    if (auth.isAuthenticated) {
-      console.log('update token');
-      const token = await auth.getTokenSilently();
-      updateApolloClientHeaders(token);
-      apolloClient.resetStore();
-    }
-  },
-  { immediate: true }
-);
 </script>
 
 <style lang="scss" scoped>

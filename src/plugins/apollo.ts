@@ -7,23 +7,26 @@ import {
   NormalizedCacheObject,
 } from '@apollo/client/core';
 import { GET_GAMES } from '@/services/games';
-import { setContext } from '@apollo/client/link/context';
 
 let apolloClient: ApolloClient<NormalizedCacheObject>;
 
-export async function createApolloClient(
+let authToken: string | undefined;
+
+export function createApolloClient(
   token?: string
-): Promise<ApolloClient<NormalizedCacheObject>> {
+): ApolloClient<NormalizedCacheObject> {
   // HTTP connection to the API
   const httpLink = createHttpLink({
     uri: 'https://jdrave.hasura.app/v1/graphql',
   });
 
+  authToken = token;
+
   const authMiddleware = new ApolloLink((operation, forward) => {
-    if (token) {
+    if (authToken) {
       operation.setContext({
         headers: {
-          authorization: `Bearer ${token}`,
+          authorization: `Bearer ${authToken}`,
         },
       });
     }
@@ -48,11 +51,7 @@ export async function createApolloClient(
 }
 
 export async function updateApolloClientHeaders(token?: string): Promise<void> {
-  setContext(() => ({
-    headers: {
-      authorization: token ? `Bearer ${token}` : undefined,
-    },
-  }));
+  authToken = token;
 }
 
 export { apolloClient };
