@@ -8,13 +8,14 @@ import registerComponents from '@/components/base';
 import { createApolloClient } from '@/plugins/apollo';
 import { createAuth0 } from '@auth0/auth0-vue';
 import authConfig from '../auth_config.json';
+import authConfigDev from '../auth_config.dev.json';
 
 const app = createApp(App).use(router);
 
 registerComponents(app);
 
 const auth = createAuth0({
-  ...authConfig,
+  ...(process.env.NODE_ENV === 'production' ? authConfig : authConfigDev),
   redirect_uri:
     process.env.NODE_ENV === 'production'
       ? 'https://kevmorpain.github.io/jdrave-app'
