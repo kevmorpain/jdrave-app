@@ -5,7 +5,7 @@
 
   <p v-if="loading">Les jeux sont en train de charger...</p>
 
-  <ul v-else class="grid gap-14 grid-cols-3">
+  <ul v-else class="grid gap-14 md:grid-cols-3">
     <router-link
       :to="{ name: 'game', params: { gameId: game.id } }"
       v-for="game in games"

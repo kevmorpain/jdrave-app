@@ -15,6 +15,10 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'home',
+    meta: {
+      transparentNav: true,
+      fullWidth: true,
+    },
     component: () =>
       import(/* webpackChunkName: "home" */ '@/views/HomeView.vue'),
   },
@@ -48,12 +52,6 @@ const routes: RouteRecordRaw[] = [
     props: true,
     component: () =>
       import(/* webpackChunkName: "characters" */ '@/views/characters/_id.vue'),
-  },
-  {
-    path: '/log',
-    name: 'log',
-    component: () =>
-      import(/* webpackChunkName: "log" */ '@/views/LogView.vue'),
   },
 ];
 

@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import Layout from '@/components/layouts/Default.vue';
+import Layout from '@/components/layouts/DefaultLayout.vue';
 import { apolloClient, updateApolloClientHeaders } from '@/plugins/apollo';
 import { useAuth0 } from '@auth0/auth0-vue';
 import { watchEffect } from 'vue';

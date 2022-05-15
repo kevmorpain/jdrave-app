@@ -1,6 +1,9 @@
 <template>
-  <nav class="navbar">
-    <ul>
+  <nav
+    class="flex justify-between items-center border-b bg-primary text-white py-4 px-4 md:px-16"
+    :class="{ 'bg-transparent border-b-0': $route.meta.transparentNav }"
+  >
+    <ul class="flex m-0">
       <router-link
         v-for="{ name, text } in filteredLinks"
         custom
@@ -8,7 +11,12 @@
         :key="name"
         v-slot="{ navigate }"
       >
-        <li @click="navigate">{{ text }}</li>
+        <li
+          class="m-0 hover:cursor-pointer py-2 px-4 hover:text-secondary transition-colors duration-200 ease-out"
+          @click="navigate"
+        >
+          {{ text }}
+        </li>
       </router-link>
     </ul>
 
@@ -38,13 +46,7 @@ const links = ref([
   },
 ]);
 
-const {
-  // loginWithRedirect,
-  loginWithPopup,
-  logout,
-  isAuthenticated,
-  isLoading,
-} = useAuth0();
+const { loginWithPopup, logout, isAuthenticated, isLoading } = useAuth0();
 
 const handleLogin = () => loginWithPopup();
 
@@ -64,17 +66,3 @@ const handleLogout = () =>
         : 'http://localhost:8080',
   });
 </script>
-
-<style lang="scss" scoped>
-.navbar {
-  @apply flex justify-between items-center border-b bg-primary text-white py-4 px-16;
-
-  ul {
-    @apply flex m-0;
-
-    li {
-      @apply m-0 hover:cursor-pointer py-2 px-4 hover:text-secondary transition-colors duration-200 ease-out;
-    }
-  }
-}
-</style>

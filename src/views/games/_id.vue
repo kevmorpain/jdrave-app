@@ -15,7 +15,7 @@
 
   <p v-if="loading">Characters are loading</p>
 
-  <ul v-else class="grid gap-14 grid-cols-4">
+  <ul v-else class="grid gap-14 md:grid-cols-4">
     <router-link
       v-for="character in sortedCharacters"
       :to="{ name: 'character', params: { characterId: character.id } }"

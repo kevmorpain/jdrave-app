@@ -1,7 +1,10 @@
 <template>
   <Navbar class="fixed z-10 w-full" />
 
-  <section class="max-w-screen-xl m-auto px-10 pt-[70px]">
+  <section
+    class="pt-[90px] pb-10"
+    :class="{ 'max-w-screen-xl mx-auto px-10': !$route.meta.fullWidth }"
+  >
     <slot />
   </section>
 </template>

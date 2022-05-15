@@ -6,8 +6,11 @@
 
   <p v-if="loading">Character is loading</p>
 
-  <div v-else class="border rounded-xl p-6 grid grid-cols-3 gap-6">
-    <div class="col-span-2 grid grid-cols-2 gap-x-6 place-content-start">
+  <div
+    v-else
+    class="md:border rounded-xl md:p-6 grid md:grid-cols-3 gap-y-6 md:gap-6"
+  >
+    <div class="md:col-span-2 grid grid-cols-2 gap-x-6 place-content-start">
       <BaseInput label="Nom" v-model="name" />
       <BaseInput
         class="row-start-2"
@@ -36,7 +39,7 @@
       </div>
     </div>
 
-    <div class="text-center">
+    <div class="text-center row-start-1 md:row-start-auto">
       <img class="rounded w-96 h-96 object-cover mb-6" :src="picture" />
 
       <BaseButton class="primary" @click="triggerFileInputFocus">
