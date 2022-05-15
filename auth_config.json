@@ -1,5 +1,5 @@
 {
   "domain": "jdrave-app.eu.auth0.com",
   "client_id": "1HcsSfcNhxQvUogLS6hHzjNCiKvAnssW",
-  "audience": "https://jdrave.eu.auth0.com/api/v2/"
+  "audience": "https://jdrave-app.eu.auth0.com/api/v2/"
 }
