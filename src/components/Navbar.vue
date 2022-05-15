@@ -38,9 +38,15 @@ const links = ref([
   },
 ]);
 
-const { loginWithRedirect, logout, isAuthenticated, isLoading } = useAuth0();
+const {
+  // loginWithRedirect,
+  loginWithPopup,
+  logout,
+  isAuthenticated,
+  isLoading,
+} = useAuth0();
 
-const handleLogin = () => loginWithRedirect();
+const handleLogin = () => loginWithPopup();
 
 const filteredLinks = computed(() => {
   if (isAuthenticated.value) {
