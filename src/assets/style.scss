@@ -24,3 +24,7 @@
     @apply text-primary;
   }
 }
+
+:focus-visible {
+  outline: none;
+}

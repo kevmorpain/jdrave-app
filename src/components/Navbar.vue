@@ -16,6 +16,9 @@
           @click="navigate"
         >
           {{ text }}
+          <template v-if="name === 'profile' && user">
+            ({{ user.username }})
+          </template>
         </li>
       </router-link>
     </ul>
@@ -32,6 +35,9 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { useAuth0 } from '@auth0/auth0-vue';
+import { useQuery } from '@vue/apollo-composable';
+import GetCurrentUser from '@/services/users/GetCurrentUser.query.gql';
+import IUserQuery from '@/types/services/UserQuery.interface';
 
 const links = ref([
   {
@@ -42,6 +48,11 @@ const links = ref([
   {
     name: 'games',
     text: 'Jeux',
+    needAuth: true,
+  },
+  {
+    name: 'profile',
+    text: 'Mon compte',
     needAuth: true,
   },
 ]);
@@ -65,4 +76,7 @@ const handleLogout = () =>
         ? 'https://kevmorpain.github.io/jdrave-app'
         : 'http://localhost:8080',
   });
+
+const { result } = useQuery<IUserQuery>(GetCurrentUser);
+const user = computed(() => result.value?.current_user[0]);
 </script>

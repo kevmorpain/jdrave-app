@@ -29,26 +29,14 @@
   </ul>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import { computed } from 'vue';
 import { GET_GAMES } from '@/services/games';
-import { useQuery, useResult } from '@vue/apollo-composable';
+import { useQuery } from '@vue/apollo-composable';
 import IcQuest from '@/components/icons/IcQuest.vue';
 import IGamesQuery from '@/types/services/games/GamesQuery.interface';
+import IGame from '@/types/Game';
 
-export default defineComponent({
-  name: 'GamesList',
-  components: {
-    IcQuest,
-  },
-  setup() {
-    const { result, loading } = useQuery<IGamesQuery>(GET_GAMES);
-    const games = useResult(result, [], data => data.games);
-
-    return {
-      loading,
-      games,
-    };
-  },
-});
+const { result, loading } = useQuery<IGamesQuery>(GET_GAMES);
+const games = computed<IGame[]>(() => result.value?.games ?? []);
 </script>

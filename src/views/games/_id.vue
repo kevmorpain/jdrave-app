@@ -43,43 +43,34 @@
   </ul>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from 'vue';
-import { useQuery, useResult } from '@vue/apollo-composable';
+<script setup lang="ts">
+import { computed } from 'vue';
+import { useQuery } from '@vue/apollo-composable';
 import CharactersFromGame from '@/services/characters/CharactersFromGame.gql';
 import IcCharacter from '@/components/icons/IcCharacter.vue';
 import { useFormattedTitle } from '@/utils/title';
 import ICharactersFromGameResponse from '@/types/services/characters/CharacterFromGame';
+import ICharacter from '@/types/Character.interface';
 
-export default defineComponent({
-  name: 'GamePage',
-  components: {
-    IcCharacter,
-  },
-  props: ['gameId'],
-  setup(props) {
-    const { result, loading } = useQuery<ICharactersFromGameResponse>(
-      CharactersFromGame,
-      () => ({
-        gameId: props.gameId,
-      })
-    );
-    const characters = useResult(result, [], data => data.characters);
-    const gameTitle = useResult(result, '', data => data.game.title);
+const props = defineProps<{
+  gameId: string;
+}>();
 
-    let title = useFormattedTitle(gameTitle);
+const { result, loading } = useQuery<ICharactersFromGameResponse>(
+  CharactersFromGame,
+  () => ({
+    gameId: props.gameId,
+  })
+);
 
-    const sortedCharacters = computed(() =>
-      [...characters.value].sort((characterA, characterB) =>
-        characterA.name.localeCompare(characterB.name)
-      )
-    );
+const characters = computed<ICharacter[]>(() => result.value?.characters ?? []);
+const gameTitle = computed<string>(() => result.value?.game.title ?? '');
 
-    return {
-      loading,
-      sortedCharacters,
-      title,
-    };
-  },
-});
+let title = useFormattedTitle(gameTitle);
+
+const sortedCharacters = computed(() =>
+  [...characters.value].sort((characterA, characterB) =>
+    characterA.name.localeCompare(characterB.name)
+  )
+);
 </script>

@@ -1,0 +1,7 @@
+query GetCharactersQuery ($limit: Int) {
+  characters(limit: $limit) {
+    id
+    name
+    picture
+  }
+}

@@ -47,11 +47,25 @@ const routes: RouteRecordRaw[] = [
     },
   ]),
   {
+    path: '/characters',
+    name: 'characters_list',
+    component: () =>
+      import(
+        /* webpackChunkName: "characters" */ '@/views/characters/index.vue'
+      ),
+  },
+  {
     path: '/characters/:characterId',
     name: 'character',
     props: true,
     component: () =>
       import(/* webpackChunkName: "characters" */ '@/views/characters/_id.vue'),
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: () =>
+      import(/* webpackChunkName: "profile" */ '@/views/ProfileView.vue'),
   },
 ];
 

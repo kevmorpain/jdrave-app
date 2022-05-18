@@ -2,24 +2,33 @@
   <div class="mb-6">
     <label
       :for="id"
-      class="inline-block mb-2 font-medium text-gray-900 dark:text-gray-300"
+      class="inline-block mb-2 font-medium transition-colors dark:text-gray-300"
+      :class="{ 'text-primary': isFocused }"
     >
       {{ label }}
     </label>
     <input
       :id="id"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+      class="border border-gray-300 text-sm rounded-lg transition-colors focus:ring-primary focus:border-primary block w-full p-2.5"
+      :class="{
+        'bg-gray-50': !readonly,
+        'bg-gray-100 focus:border-gray-300': readonly,
+      }"
       :min="min"
       :max="max"
       :type="type"
       :value="modelValue"
+      :readonly="readonly"
       @input="emitValue"
+      @focus="isFocused = !readonly && true"
+      @blur="isFocused = false"
     />
   </div>
 </template>
 
 <script setup lang="ts">
 import { v4 as getRandomId } from 'uuid';
+import { ref } from 'vue';
 
 const id = getRandomId();
 withDefaults(
@@ -29,6 +38,7 @@ withDefaults(
     type?: string;
     max?: number;
     min?: number;
+    readonly?: boolean;
   }>(),
   {
     type: 'text',
@@ -40,6 +50,8 @@ const emit = defineEmits(['update:modelValue']);
 const emitValue = (event: Event): void => {
   emit('update:modelValue', (event.target as HTMLInputElement).value);
 };
+
+const isFocused = ref<boolean>(false);
 </script>
 
 <style lang="scss" scoped>

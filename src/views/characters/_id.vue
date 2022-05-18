@@ -55,9 +55,9 @@
   </div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, ref, watchEffect } from 'vue';
-import { useMutation, useQuery, useResult } from '@vue/apollo-composable';
+<script setup lang="ts">
+import { computed, ref, watchEffect } from 'vue';
+import { useMutation, useQuery } from '@vue/apollo-composable';
 import CharacterQuery from '@/services/characters/Character.query.gql';
 import CharacterMutation from '@/services/characters/Character.mutation.gql';
 import CharacterPictureMutation from '@/services/characters/CharacterPicture.mutation.gql';
@@ -66,124 +66,96 @@ import { useRouter } from 'vue-router';
 import { useFormattedTitle } from '@/utils/title';
 import ICharacterQuery from '@/types/services/characters/CharacterQuery.interface';
 import { uploadImage } from '@/plugins/cloudinary';
+import ICharacter from '@/types/Character.interface';
 
-export default defineComponent({
-  name: 'CharacterPage',
-  props: {
-    characterId: {
-      type: String,
-      required: true,
-    },
-  },
+const props = defineProps<{
+  characterId: string;
+}>();
+const name = ref<string>('');
+const features = ref<string>('');
+const maxHp = ref<number>(0);
+const currentHp = ref<number>(0);
+const picture = ref<string>('');
+const pictureInputRef = ref<InstanceType<typeof HTMLInputElement> | null>(null);
 
-  setup(props) {
-    const name = ref<string>('');
-    const features = ref<string>('');
-    const maxHp = ref<number>(0);
-    const currentHp = ref<number>(0);
-    const picture = ref<string>('');
-    const pictureInputRef = ref<InstanceType<typeof HTMLInputElement> | null>(
-      null
-    );
+const { result, loading } = useQuery<ICharacterQuery>(CharacterQuery, () => ({
+  characterId: props.characterId,
+}));
 
-    const { result, loading } = useQuery<ICharacterQuery>(
-      CharacterQuery,
-      () => ({
-        characterId: props.characterId,
-      })
-    );
+const character = computed<ICharacter>(
+  () => result.value?.character ?? ({} as ICharacter)
+);
 
-    const character = useResult(result, null, data => data.character);
+let title = computed(() => '');
 
-    let title = computed(() => '');
+watchEffect(() => {
+  if (character.value) {
+    name.value = character.value.name || '';
+    features.value = JSON.stringify(character.value.features);
+    maxHp.value = character.value.maxHp;
+    currentHp.value = character.value.currentHp;
+    picture.value = character.value.picture;
+  }
 
-    watchEffect(() => {
-      if (character.value) {
-        name.value = character.value.name || '';
-        features.value = JSON.stringify(character.value.features);
-        maxHp.value = character.value.maxHp;
-        currentHp.value = character.value.currentHp;
-        picture.value = character.value.picture;
-      }
-
-      title = useFormattedTitle(name);
-    });
-
-    const {
-      mutate: updateCharacter,
-      loading: isUpdating,
-      onDone: onUpdateDone,
-    } = useMutation(CharacterMutation, () => ({
-      variables: {
-        characterId: props.characterId,
-        name: name.value,
-        features: JSON.parse(features.value),
-        currentHp: currentHp.value,
-        maxHp: maxHp.value,
-      },
-    }));
-
-    onUpdateDone(() => {
-      console.log('Done!');
-    });
-
-    const { mutate: deleteCharacter, onDone: onDeleteDone } = useMutation(
-      DeleteCharacter,
-      () => ({
-        variables: {
-          characterId: props.characterId,
-        },
-      })
-    );
-
-    const router = useRouter();
-
-    onDeleteDone(({ data }): void => {
-      router.replace({
-        name: 'game',
-        params: {
-          gameId: data.deleteCharacter.gameId,
-        },
-      });
-    });
-
-    const { mutate: updateCharacterPicture } = useMutation(
-      CharacterPictureMutation
-    );
-
-    const handlePictureUpload = async (event: Event): Promise<void> => {
-      const file = (event.target as HTMLInputElement).files?.[0];
-
-      if (file) {
-        const { url } = await uploadImage(file);
-
-        await updateCharacterPicture({
-          characterId: props.characterId,
-          pictureUrl: url,
-        });
-      }
-    };
-
-    const triggerFileInputFocus = (): void => {
-      pictureInputRef.value?.click();
-    };
-
-    return {
-      loading,
-      character,
-      name,
-      features,
-      currentHp,
-      maxHp,
-      updateCharacter,
-      deleteCharacter,
-      title,
-      isUpdating,
-      picture,
-      handlePictureUpload,
-      triggerFileInputFocus,
-      pictureInputRef,
-    };
-  },
+  title = useFormattedTitle(name);
 });
+
+const {
+  mutate: updateCharacter,
+  loading: isUpdating,
+  onDone: onUpdateDone,
+} = useMutation(CharacterMutation, () => ({
+  variables: {
+    characterId: props.characterId,
+    name: name.value,
+    features: JSON.parse(features.value),
+    currentHp: currentHp.value,
+    maxHp: maxHp.value,
+  },
+}));
+
+onUpdateDone(() => {
+  console.log('Done!');
+});
+
+const { mutate: deleteCharacter, onDone: onDeleteDone } = useMutation(
+  DeleteCharacter,
+  () => ({
+    variables: {
+      characterId: props.characterId,
+    },
+  })
+);
+
+const router = useRouter();
+
+onDeleteDone(({ data }): void => {
+  router.replace({
+    name: 'game',
+    params: {
+      gameId: data.deleteCharacter.gameId,
+    },
+  });
+});
+
+const { mutate: updateCharacterPicture } = useMutation(
+  CharacterPictureMutation
+);
+
+const handlePictureUpload = async (event: Event): Promise<void> => {
+  const file = (event.target as HTMLInputElement).files?.[0];
+
+  if (file) {
+    const { url } = await uploadImage(file);
+
+    await updateCharacterPicture({
+      characterId: props.characterId,
+      pictureUrl: url,
+    });
+  }
+};
+
+const triggerFileInputFocus = (): void => {
+  pictureInputRef.value?.click();
+};
 </script>
