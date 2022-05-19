@@ -1,12 +1,20 @@
 <template>
-  <h1 class="page-title mb-8">
-    <span>Jeux</span>
-  </h1>
+  <header class="flex justify-between items-center mb-8">
+    <h1 class="page-title mb-8">
+      <span>Jeux</span>
+    </h1>
+
+    <RouterLink custom :to="{ name: 'new_game' }" v-slot="{ navigate }">
+      <BaseButton class="secondary" @click="navigate">
+        Créer une campagne
+      </BaseButton>
+    </RouterLink>
+  </header>
 
   <p v-if="loading">Les jeux sont en train de charger...</p>
 
   <ul v-else class="grid gap-14 md:grid-cols-3">
-    <router-link
+    <RouterLink
       :to="{ name: 'game', params: { gameId: game.id } }"
       v-for="game in games"
       :key="game.id"
@@ -25,7 +33,7 @@
           <p>{{ game.description }}</p>
         </article>
       </li>
-    </router-link>
+    </RouterLink>
   </ul>
 </template>
 

@@ -18,7 +18,7 @@
 @tailwind utilities;
 
 .page-title {
-  @apply font-secondary underline text-4xl text-center decoration-primary underline-offset-2;
+  @apply font-secondary text-4xl text-center;
 
   span {
     @apply text-primary;

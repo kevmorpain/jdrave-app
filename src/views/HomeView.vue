@@ -182,10 +182,10 @@ const games = computed<{
 });
 
 const dieResult = ref<Record<EDie, string>>({
-  die6: '0',
-  die10: '0',
-  die20: '0',
-  die100: '0',
+  die6: '1',
+  die10: '1',
+  die20: '1',
+  die100: '1',
 });
 
 const rollDie = (die: EDie): void => {

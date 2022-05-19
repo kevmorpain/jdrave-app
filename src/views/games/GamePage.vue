@@ -1,5 +1,5 @@
 <template>
-  <header class="flex justify-between align-middle mb-8">
+  <header class="flex justify-between items-center mb-8">
     <h1 class="page-title" v-html="title" />
 
     <router-link

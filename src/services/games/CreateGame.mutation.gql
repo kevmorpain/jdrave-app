@@ -1,0 +1,12 @@
+mutation CreateGame($description: String, $title: String!) {
+  insert_games_one(object: {title: $title, description: $description}) {
+    description
+    title
+    id
+    created_at
+    dungeon_master {
+      id
+      username
+    }
+  }
+}
