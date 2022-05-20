@@ -3,7 +3,9 @@
 
   <template v-else>
     <article
-      class="hero relative bg-center bg-cover h-[300px] md:h-[500px] mb-12 flex flex-col justify-end before:content-[''] before:absolute before:inset-0 before:bg-primary before:bg-opacity-70 overflow-hidden"
+      v-if="games.last"
+      ref="heroRef"
+      class="hero relative bg-center bg-cover min-h-[300px] md:h-[500px] pt-28 md:pt-0 mb-12 flex flex-col justify-end before:content-[''] before:absolute before:inset-0 before:bg-primary before:bg-opacity-70 overflow-hidden"
       :style="`background-image: url(${games.last.picture_url})`"
     >
       <div class="max-w-screen-xl mx-auto w-full relative px-8 mb-12 md:mb-4">
@@ -37,7 +39,7 @@
       </div>
     </article>
 
-    <div class="max-w-xl mx-auto">
+    <div class="max-w-xl mx-auto px-4">
       <div class="mb-12">
         <h2 class="page-title mb-11">Lancer de <span>dés</span></h2>
 
@@ -60,7 +62,7 @@
       <div class="mb-12">
         <h2 class="page-title mb-8">Dernières <span>campagnes</span></h2>
 
-        <ul class="grid gap-x-14 md:grid-cols-2 mb-8">
+        <ul class="grid gap-8 md:gap-14 md:grid-cols-2 mb-8">
           <RouterLink
             :to="{ name: 'game', params: { gameId: game.id } }"
             v-for="game in games.others"
@@ -94,10 +96,10 @@
         </div>
       </div>
 
-      <div class="mb-12">
+      <div>
         <h2 class="page-title mb-8">Derniers <span>personnages</span></h2>
 
-        <ul class="grid gap-x-14 md:grid-cols-2 mb-8">
+        <ul class="grid gap-8 md:gap-14 md:grid-cols-2 mb-8">
           <RouterLink
             v-for="character in characters"
             :to="{ name: 'character', params: { characterId: character.id } }"
@@ -157,6 +159,7 @@ import GetCharactersQuery from '@/services/characters/GetCharacters.query.gql';
 import ICharactersQuery from '@/types/services/characters/CharactersQuery.interface';
 import ICharacter from '@/types/Character.interface';
 import CharacterIcon from '@/components/icons/IcCharacter.vue';
+import { useNavScroll } from '@/utils/updateNavScroll';
 
 enum EDie {
   Die6 = 'die6',
@@ -213,4 +216,6 @@ const characters = computed<ICharacter[]>(
 );
 
 const loading = computed(() => charactersLoading.value && gamesLoading.value);
+
+const { heroRef } = useNavScroll();
 </script>

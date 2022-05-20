@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply text-dark font-primary;
+    @apply text-dark font-primary bg-primary;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

@@ -1,7 +1,11 @@
 <template>
   <nav
-    class="flex justify-between items-center border-b bg-primary text-white py-4 px-4 md:px-16"
-    :class="{ 'bg-transparent border-b-0': $route.meta.transparentNav }"
+    ref="navRef"
+    class="flex justify-between items-center bg-primary text-white py-4 px-4 md:px-16 transition-all duration-500"
+    :class="{
+      'bg-transparent': $route.meta.transparentNav && !hasPassedHero,
+      'py-1': !$route.meta.transparentNav || hasPassedHero,
+    }"
   >
     <ul class="flex items-center m-0">
       <RouterLink custom :to="{ name: 'home' }" v-slot="{ navigate }">
@@ -9,7 +13,7 @@
           class="m-0 hover:cursor-pointer py-2 px-4 hover:text-secondary transition-colors duration-200 ease-out"
           @click="navigate"
         >
-          <LogoSvg class="w-[250px] h-14" />
+          <LogoSvg class="w-[170px] md:w-[250px] h-14" />
         </li>
       </RouterLink>
 
@@ -50,6 +54,7 @@ import { useQuery } from '@vue/apollo-composable';
 import GetCurrentUser from '@/services/users/GetCurrentUser.query.gql';
 import IUserQuery from '@/types/services/UserQuery.interface';
 import LogoSvg from '@/components/LogoSvg.vue';
+import { useNavScroll } from '@/utils/updateNavScroll';
 
 const links = ref([
   {
@@ -78,4 +83,6 @@ const handleLogout = () =>
 
 const { result } = useQuery<IUserQuery>(GetCurrentUser);
 const user = computed(() => result.value?.current_user[0]);
+
+const { hasPassedHero, navRef } = useNavScroll();
 </script>

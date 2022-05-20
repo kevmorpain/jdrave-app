@@ -2,7 +2,7 @@
   <Navbar class="fixed z-10 w-full" />
 
   <section
-    class="pb-10"
+    class="pb-10 bg-white min-h-screen"
     :class="{
       'max-w-screen-xl mx-auto px-10 default-layout': !$route.meta.fullWidth,
     }"
