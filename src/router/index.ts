@@ -30,14 +30,6 @@ const routes: RouteRecordRaw[] = [
         import(/* webpackChunkName: "games" */ '@/views/games/GamesList.vue'),
     },
     {
-      path: 'new_game',
-      name: 'new_game',
-      component: () =>
-        import(
-          /* webpackChunkName: "games" */ '@/views/games/GameCreation.vue'
-        ),
-    },
-    {
       path: ':gameId',
       name: 'game',
       props: true,
@@ -54,15 +46,6 @@ const routes: RouteRecordRaw[] = [
       ),
   },
   {
-    path: '/:gameId/new_character',
-    name: 'new_character',
-    props: true,
-    component: () =>
-      import(
-        /* webpackChunkName: "characters" */ '@/views/characters/CharacterCreation.vue'
-      ),
-  },
-  {
     path: '/characters/:characterId',
     name: 'character',
     props: true,
@@ -72,10 +55,37 @@ const routes: RouteRecordRaw[] = [
       ),
   },
   {
-    path: '/profile',
-    name: 'profile',
+    path: '/app',
+    name: 'app',
     component: () =>
-      import(/* webpackChunkName: "profile" */ '@/views/ProfileView.vue'),
+      import(/* webpackChunkName: "app_app" */ '@/views/app/AppWrapper.vue'),
+    children: [
+      {
+        path: 'new_game',
+        name: 'new_game',
+        component: () =>
+          import(
+            /* webpackChunkName: "app_games" */ '@/views/games/GameCreation.vue'
+          ),
+      },
+      {
+        path: ':gameId/new_character',
+        name: 'new_character',
+        props: true,
+        component: () =>
+          import(
+            /* webpackChunkName: "app_characters" */ '@/views/characters/CharacterCreation.vue'
+          ),
+      },
+      {
+        path: 'profile',
+        name: 'profile',
+        component: () =>
+          import(
+            /* webpackChunkName: "app_profile" */ '@/views/ProfileView.vue'
+          ),
+      },
+    ],
   },
 ];
 

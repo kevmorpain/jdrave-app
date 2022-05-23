@@ -19,8 +19,8 @@ const auth = createAuth0({
   ...authConfigDev,
   redirect_uri:
     process.env.NODE_ENV === 'production'
-      ? 'https://kevmorpain.github.io/jdrave-app'
-      : 'http://localhost:8080',
+      ? 'https://kevmorpain.github.io/jdrave-app/app'
+      : 'http://localhost:8080/app',
 });
 app.use(auth);
 
