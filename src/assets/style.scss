@@ -12,6 +12,10 @@
   a {
     @apply text-primary;
   }
+
+  #app {
+    @apply bg-white;
+  }
 }
 
 @tailwind components;

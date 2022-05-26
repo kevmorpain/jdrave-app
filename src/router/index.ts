@@ -1,3 +1,4 @@
+import { authGuard } from '@auth0/auth0-vue';
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 
 function prefixRoutes(
@@ -18,6 +19,7 @@ const routes: RouteRecordRaw[] = [
     meta: {
       transparentNav: true,
       fullWidth: true,
+      isAuthenticationNeeded: false,
     },
     component: () =>
       import(/* webpackChunkName: "home" */ '@/views/HomeView.vue'),
@@ -26,6 +28,9 @@ const routes: RouteRecordRaw[] = [
     {
       path: '',
       name: 'games',
+      meta: {
+        isAuthenticationNeeded: false,
+      },
       component: () =>
         import(/* webpackChunkName: "games" */ '@/views/games/GamesList.vue'),
     },
@@ -33,6 +38,9 @@ const routes: RouteRecordRaw[] = [
       path: ':gameId',
       name: 'game',
       props: true,
+      meta: {
+        isAuthenticationNeeded: false,
+      },
       component: () =>
         import(/* webpackChunkName: "games" */ '@/views/games/GamePage.vue'),
     },
@@ -40,6 +48,9 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/characters',
     name: 'characters_list',
+    meta: {
+      isAuthenticationNeeded: false,
+    },
     component: () =>
       import(
         /* webpackChunkName: "characters" */ '@/views/characters/CharactersList.vue'
@@ -49,6 +60,9 @@ const routes: RouteRecordRaw[] = [
     path: '/characters/:characterId',
     name: 'character',
     props: true,
+    meta: {
+      isAuthenticationNeeded: false,
+    },
     component: () =>
       import(
         /* webpackChunkName: "characters" */ '@/views/characters/CharacterPage.vue'
@@ -57,12 +71,19 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/app',
     name: 'app',
+    meta: {
+      isAuthenticationNeeded: true,
+    },
+    beforeEnter: authGuard,
     component: () =>
       import(/* webpackChunkName: "app_app" */ '@/views/app/AppWrapper.vue'),
     children: [
       {
         path: 'new_game',
         name: 'new_game',
+        meta: {
+          isAuthenticationNeeded: true,
+        },
         component: () =>
           import(
             /* webpackChunkName: "app_games" */ '@/views/games/GameCreation.vue'
@@ -72,6 +93,9 @@ const routes: RouteRecordRaw[] = [
         path: ':gameId/new_character',
         name: 'new_character',
         props: true,
+        meta: {
+          isAuthenticationNeeded: true,
+        },
         component: () =>
           import(
             /* webpackChunkName: "app_characters" */ '@/views/characters/CharacterCreation.vue'
@@ -80,6 +104,9 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'profile',
         name: 'profile',
+        meta: {
+          isAuthenticationNeeded: true,
+        },
         component: () =>
           import(
             /* webpackChunkName: "app_profile" */ '@/views/ProfileView.vue'
