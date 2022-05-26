@@ -30,6 +30,11 @@
         <p
           class="bg-tertiary text-sm md:text-lg px-2.5 md:px-5 inline-flex items-center"
         >
+          <DungeonMasterIcon
+            v-for="player in games.last.players.user"
+            :key="player.id"
+            class="w-6 h-6 md:w-10 md:h-10"
+          />
           {{
             format(new Date(games.last.created_at), 'dd MMMM yyyy', {
               locale: fr,
@@ -148,15 +153,13 @@
 import QuestIcon from '@/components/icons/IcQuest.vue';
 import PrismIcon from '@/components/icons/PrismIcon.vue';
 import DungeonMasterIcon from '@/components/icons/DungeonMasterIcon.vue';
-import { GET_GAMES } from '@/services/games';
 import { useQuery } from '@vue/apollo-composable';
-import IGamesQuery from '@/types/services/games/GamesQuery.interface';
+import GetHomeData from '@/services/GetHomeData.query.gql';
+import IHomeQuery from '@/types/services/HomeQuery.interface';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { computed, ref } from 'vue';
 import IGame from '@/types/Game';
-import GetCharactersQuery from '@/services/characters/GetCharacters.query.gql';
-import ICharactersQuery from '@/types/services/characters/CharactersQuery.interface';
 import ICharacter from '@/types/Character.interface';
 import CharacterIcon from '@/components/icons/IcCharacter.vue';
 import { useNavScroll } from '@/utils/updateNavScroll';
@@ -168,21 +171,21 @@ enum EDie {
   Die100 = 'die100',
 }
 
-const { result: gamesResult, loading: gamesLoading } = useQuery<IGamesQuery>(
-  GET_GAMES
-);
+const { result, loading } = useQuery<IHomeQuery>(GetHomeData);
 
 const games = computed<{
   last: IGame;
   others: IGame[];
 }>(() => {
-  const [last, ...others] = gamesResult.value?.games ?? [];
+  const [last, ...others] = result.value?.games ?? [];
 
   return {
     last,
     others,
   };
 });
+
+const characters = computed<ICharacter[]>(() => result.value?.characters ?? []);
 
 const dieResult = ref<Record<EDie, string>>({
   die6: '1',
@@ -205,17 +208,6 @@ const rollDie = (die: EDie): void => {
     minimumIntegerDigits: die === EDie.Die6 ? 1 : 2,
   }).format(result);
 };
-
-const { result: charactersResult, loading: charactersLoading } = useQuery<
-  ICharactersQuery
->(GetCharactersQuery, {
-  limit: 2,
-});
-const characters = computed<ICharacter[]>(
-  () => charactersResult.value?.characters ?? []
-);
-
-const loading = computed(() => charactersLoading.value && gamesLoading.value);
 
 const { heroRef } = useNavScroll();
 </script>

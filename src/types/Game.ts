@@ -10,4 +10,7 @@ export default interface IGame {
   picture_url: string;
   created_at: string;
   dungeon_master: IUser;
+  players: {
+    user: IUser[];
+  };
 }

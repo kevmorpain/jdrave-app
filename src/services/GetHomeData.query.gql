@@ -1,0 +1,23 @@
+query GetHomeData($created_at: order_by = desc, $limit: Int = 2) {
+  games(order_by: { created_at: $created_at }) {
+    id
+    title
+    description
+    picture_url
+    created_at
+    dungeon_master {
+      id
+      username
+    }
+    players {
+      user {
+        username
+      }
+    }
+  }
+  characters(limit: $limit, order_by: { created_at: $created_at }) {
+    id
+    name
+    picture
+  }
+}
