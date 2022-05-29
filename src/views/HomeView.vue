@@ -9,32 +9,39 @@
       :style="`background-image: url(${games.last.picture_url})`"
     >
       <div class="max-w-screen-xl mx-auto w-full relative px-8 mb-12 md:mb-4">
-        <h1
-          class="text-secondary text-3xl md:text-4.5xl font-secondary md:mb-7 flex items-baseline"
+        <RouterLink
+          custom
+          :to="{ name: 'game', params: { gameId: games.last.id } }"
+          v-slot="{ navigate }"
         >
-          <PrismIcon class="mr-1" />{{ games.last.title
-          }}<PrismIcon class="ml-2" />
-        </h1>
+          <h1
+            class="text-secondary text-3xl md:text-4.5xl font-secondary md:mb-7 flex items-baseline cursor-pointer"
+            @click="navigate"
+          >
+            <PrismIcon class="mr-1" />
+            {{ games.last.title }}
+            <PrismIcon class="ml-2" />
+          </h1>
+        </RouterLink>
+
         <p class="text-white md:text-xl">{{ games.last.description }}</p>
       </div>
 
-      <div
-        class="self-end relative flex rounded-tl-md overflow-hidden shadow-hero"
-      >
-        <div
-          class="bg-secondary inline-flex items-center"
-          :title="games.last.dungeon_master.username"
+      <div class="self-end relative flex shadow-hero">
+        <BaseTooltip
+          class="bg-secondary rounded-tl-md inline-flex items-center"
+          :tooltip-text="games.last.dungeon_master.username"
         >
           <DungeonMasterIcon class="w-6 h-6 md:w-10 md:h-10" />
-        </div>
+        </BaseTooltip>
         <div class="bg-tertiary inline-flex items-center">
-          <div
+          <BaseTooltip
             v-for="player in games.last.players"
             :key="player.user.id"
-            :title="player.user.username"
+            :tooltip-text="player.user.username"
           >
             <PlayerIcon class="w-6 h-6 md:w-10 md:h-10" />
-          </div>
+          </BaseTooltip>
           <p class="text-sm md:text-lg px-2.5 md:px-5">
             {{
               format(new Date(games.last.created_at), 'dd MMMM yyyy', {

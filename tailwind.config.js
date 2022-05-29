@@ -28,6 +28,9 @@ module.exports = {
       boxShadow: {
         hero: '-2px -2px 2px',
       },
+      borderWidth: {
+        6: '6px',
+      },
     },
   },
   plugins: [],

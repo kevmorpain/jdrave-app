@@ -1,3 +1,8 @@
+fragment userBasicInfo on users {
+  id
+  username
+}
+
 query GetHomeData($created_at: order_by = desc, $status: statuses_enum = published, $limit: Int = 2) {
   games(order_by: { created_at: $created_at }, where: { status: { _eq: $status } }) {
     id
@@ -6,13 +11,11 @@ query GetHomeData($created_at: order_by = desc, $status: statuses_enum = publish
     picture_url
     created_at
     dungeon_master {
-      id
-      username
+      ...userBasicInfo
     }
     players {
       user {
-        id
-        username
+        ...userBasicInfo
       }
     }
   }

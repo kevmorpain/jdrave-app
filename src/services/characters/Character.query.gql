@@ -6,5 +6,6 @@ query CharacterQuery($characterId: uuid!) {
     maxHp: max_hp
     currentHp: current_hp
     picture
+    is_npc
   }
 }

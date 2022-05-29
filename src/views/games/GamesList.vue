@@ -1,14 +1,8 @@
 <template>
-  <header class="flex justify-between items-center mb-8">
+  <header class="flex justify-center items-center mb-8">
     <h1 class="page-title mb-8">
       <span>Jeux</span>
     </h1>
-
-    <RouterLink custom :to="{ name: 'new_game' }" v-slot="{ navigate }">
-      <BaseButton class="secondary" @click="navigate">
-        Créer une campagne
-      </BaseButton>
-    </RouterLink>
   </header>
 
   <p v-if="loading">Les jeux sont en train de charger...</p>

@@ -1,16 +1,6 @@
 <template>
-  <header class="flex justify-between items-center mb-8">
+  <header class="mb-8">
     <h1 class="page-title" v-html="title" />
-
-    <router-link
-      custom
-      :to="{ name: 'new_character', params: { gameId: gameId } }"
-      v-slot="{ navigate }"
-    >
-      <BaseButton class="secondary" @click="navigate">
-        Créer un personnage
-      </BaseButton>
-    </router-link>
   </header>
 
   <p v-if="loading">Characters are loading</p>
