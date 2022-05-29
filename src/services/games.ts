@@ -12,11 +12,6 @@ const GET_GAMES = gql`
         id
         username
       }
-      players {
-        user {
-          username
-        }
-      }
     }
   }
 `;

@@ -1,5 +1,5 @@
-query GetHomeData($created_at: order_by = desc, $limit: Int = 2) {
-  games(order_by: { created_at: $created_at }) {
+query GetHomeData($created_at: order_by = desc, $status: statuses_enum = published, $limit: Int = 2) {
+  games(order_by: { created_at: $created_at }, where: { status: { _eq: $status } }) {
     id
     title
     description
@@ -11,11 +11,12 @@ query GetHomeData($created_at: order_by = desc, $limit: Int = 2) {
     }
     players {
       user {
+        id
         username
       }
     }
   }
-  characters(limit: $limit, order_by: { created_at: $created_at }) {
+  characters(limit: $limit, order_by: { created_at: $created_at }, where: { status: { _eq: $status } }) {
     id
     name
     picture

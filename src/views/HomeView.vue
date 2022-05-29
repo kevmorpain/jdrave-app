@@ -27,20 +27,22 @@
         >
           <DungeonMasterIcon class="w-6 h-6 md:w-10 md:h-10" />
         </div>
-        <p
-          class="bg-tertiary text-sm md:text-lg px-2.5 md:px-5 inline-flex items-center"
-        >
-          <DungeonMasterIcon
-            v-for="player in games.last.players.user"
-            :key="player.id"
-            class="w-6 h-6 md:w-10 md:h-10"
-          />
-          {{
-            format(new Date(games.last.created_at), 'dd MMMM yyyy', {
-              locale: fr,
-            })
-          }}
-        </p>
+        <div class="bg-tertiary inline-flex items-center">
+          <div
+            v-for="player in games.last.players"
+            :key="player.user.id"
+            :title="player.user.username"
+          >
+            <PlayerIcon class="w-6 h-6 md:w-10 md:h-10" />
+          </div>
+          <p class="text-sm md:text-lg px-2.5 md:px-5">
+            {{
+              format(new Date(games.last.created_at), 'dd MMMM yyyy', {
+                locale: fr,
+              })
+            }}
+          </p>
+        </div>
       </div>
     </article>
 
@@ -48,18 +50,30 @@
       <div class="mb-12">
         <h2 class="page-title mb-11">Lancer de <span>dés</span></h2>
 
-        <div class="flex justify-between items-center">
-          <div class="cursor-pointer select-none" @click="rollDie(EDie.Die6)">
-            Dé 6 : {{ dieResult.die6 }}
+        <div class="flex justify-between items-center flex-wrap gap-4">
+          <div
+            class="cursor-pointer select-none flex-none"
+            @click="rollDie(EDie.Die6)"
+          >
+            <D6 :result="dieResult.die6" />
           </div>
-          <div class="cursor-pointer select-none" @click="rollDie(EDie.Die10)">
-            Dé 10 : {{ dieResult.die10 }}
+          <div
+            class="cursor-pointer select-none flex-none"
+            @click="rollDie(EDie.Die10)"
+          >
+            <D10 :result="dieResult.die10" />
           </div>
-          <div class="cursor-pointer select-none" @click="rollDie(EDie.Die20)">
-            Dé 20 : {{ dieResult.die20 }}
+          <div
+            class="cursor-pointer select-none flex-none"
+            @click="rollDie(EDie.Die20)"
+          >
+            <D20 :result="dieResult.die20" />
           </div>
-          <div class="cursor-pointer select-none" @click="rollDie(EDie.Die100)">
-            Dé 100 : {{ dieResult.die100 }}
+          <div
+            class="cursor-pointer select-none flex-none"
+            @click="rollDie(EDie.Die100)"
+          >
+            <D100 :result="dieResult.die100" />
           </div>
         </div>
       </div>
@@ -153,6 +167,11 @@
 import QuestIcon from '@/components/icons/IcQuest.vue';
 import PrismIcon from '@/components/icons/PrismIcon.vue';
 import DungeonMasterIcon from '@/components/icons/DungeonMasterIcon.vue';
+import PlayerIcon from '@/components/icons/PlayerIcon.vue';
+import D6 from '@/components/dices/D6.vue';
+import D10 from '@/components/dices/D10.vue';
+import D20 from '@/components/dices/D20.vue';
+import D100 from '@/components/dices/D100.vue';
 import { useQuery } from '@vue/apollo-composable';
 import GetHomeData from '@/services/GetHomeData.query.gql';
 import IHomeQuery from '@/types/services/HomeQuery.interface';
@@ -189,9 +208,9 @@ const characters = computed<ICharacter[]>(() => result.value?.characters ?? []);
 
 const dieResult = ref<Record<EDie, string>>({
   die6: '1',
-  die10: '1',
-  die20: '1',
-  die100: '1',
+  die10: '01',
+  die20: '01',
+  die100: '01',
 });
 
 const rollDie = (die: EDie): void => {

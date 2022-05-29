@@ -11,6 +11,6 @@ export default interface IGame {
   created_at: string;
   dungeon_master: IUser;
   players: {
-    user: IUser[];
-  };
+    user: IUser;
+  }[];
 }

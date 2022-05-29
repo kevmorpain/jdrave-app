@@ -2,13 +2,19 @@
   <Navbar class="fixed z-10 w-full" />
 
   <section
-    class="pb-10 bg-white min-h-screen"
+    class="pb-10 min-h-screen"
     :class="{
       'max-w-screen-xl mx-auto px-10 default-layout': !$route.meta.fullWidth,
     }"
   >
     <slot />
   </section>
+
+  <footer class="text-center py-2">
+    <p class="text-sm text-gray-500">
+      Copyright &copy; {{ new Date().getFullYear() }}. Développé par Kévin Morpain
+    </p>
+  </footer>
 </template>
 
 <script setup lang="ts">
