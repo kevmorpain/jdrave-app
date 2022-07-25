@@ -6,6 +6,9 @@ query CharacterQuery($characterId: uuid!) {
     maxHp: max_hp
     currentHp: current_hp
     picture
+    description
     is_npc
+    inventory
+    equipment
   }
 }

@@ -1,4 +1,5 @@
 import { authGuard } from '@auth0/auth0-vue';
+import { defineAsyncComponent } from 'vue';
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 
 function prefixRoutes(
@@ -100,6 +101,33 @@ const routes: RouteRecordRaw[] = [
           import(
             /* webpackChunkName: "app_characters" */ '@/views/characters/CharacterCreation.vue'
           ),
+      },
+      {
+        path: 'character/:characterId/edit',
+        name: 'edit_character',
+        props: true,
+        meta: {
+          isAuthenticationNeeded: true,
+        },
+        component: () =>
+          import(
+            /* webpackChunkName: "app_characters" */ '@/views/characters/CharacterEdition.vue'
+          ),
+      },
+      {
+        path: ':gameId/board',
+        name: 'board',
+        props: true,
+        meta: {
+          isAuthenticationNeeded: true,
+          layout: defineAsyncComponent(() =>
+            import(
+              /* webpackChunkName: "board_layout" */ '@/components/layouts/LightLayout.vue'
+            )
+          ),
+        },
+        component: () =>
+          import(/* webpackChunkName: "app_board" */ '@/views/BoardView.vue'),
       },
       {
         path: 'profile',

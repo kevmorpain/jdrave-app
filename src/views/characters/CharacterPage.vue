@@ -3,8 +3,27 @@
 
   <div
     v-else
-    class="md:border rounded-xl md:p-6 grid md:grid-cols-3 gap-y-6 md:gap-6"
+    class="md:border rounded-xl md:p-6 grid md:grid-cols-3 gap-y-6 md:gap-6 relative"
   >
+    <div v-if="character.is_npc" class="absolute z-1 top-3 right-0">
+      <span class="text-sm bg-secondary text-white px-5 py-0.5 rounded-l">
+        PNJ
+      </span>
+    </div>
+
+    <div class="absolute right-2 top-2 z-1">
+      <RouterLink
+        custom
+        :to="{ name: 'edit_character', params: { characterId: character.id } }"
+        v-slot="{ navigate }"
+      >
+        <BaseButton class="secondary" @click="navigate">
+          Éditer
+          <PencilIcon class="w-4 h-4 ml-1" />
+        </BaseButton>
+      </RouterLink>
+    </div>
+
     <div class="text-center">
       <img class="rounded w-96 h-96 object-cover" :src="character.picture" />
     </div>
@@ -14,24 +33,41 @@
         <h1 class="page-title" v-html="title" />
       </header>
 
-      <div>
-        <h2>PV</h2>
+      <div class="col-span-2">
+        <p class="whitespace-pre-wrap">{{ character.description }}</p>
+      </div>
+
+      <div v-if="!character.is_npc" class="col-span-full">
+        <h2 class="font-semibold">PV</h2>
         <p>{{ character.currentHp }}/{{ character.maxHp }}</p>
       </div>
 
-      <div>
-        <h2>Stats</h2>
+      <div v-if="hasFeatures">
+        <h2 class="font-semibold">Stats</h2>
         <p>{{ character.features }}</p>
+      </div>
+
+      <div>
+        <h2 class="font-semibold">Équipement</h2>
+        <p class="whitespace-pre-wrap">{{ character.equipment }}</p>
+      </div>
+
+      <div>
+        <h2 class="font-semibold">Inventaire</h2>
+        <p class="whitespace-pre-wrap">{{ character.inventory }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { PencilIcon } from '@heroicons/vue/solid';
+
 import { computed } from 'vue';
 import { useQuery } from '@vue/apollo-composable';
-import CharacterQuery from '@/services/characters/Character.query.gql';
 import { useFormattedTitle } from '@/utils/title';
+import CharacterQuery from '@/services/characters/Character.query.gql';
+
 import ICharacterQuery from '@/types/services/characters/CharacterQuery.interface';
 import ICharacter from '@/types/Character.interface';
 
@@ -48,5 +84,9 @@ const character = computed<ICharacter>(
 );
 const characterName = computed<string>(() => character.value.name ?? '');
 
-let title = useFormattedTitle(characterName);
+const title = useFormattedTitle(characterName);
+
+const hasFeatures = computed<boolean>(
+  () => !Object.keys(character.value.features).length
+);
 </script>

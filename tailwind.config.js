@@ -21,6 +21,7 @@ module.exports = {
       },
       zIndex: {
         1: '1',
+        2: '2',
       },
       maxWidth: {
         hero: '956px',
@@ -30,6 +31,9 @@ module.exports = {
       },
       borderWidth: {
         6: '6px',
+      },
+      gridTemplateColumns: {
+        'fill-2': 'repeat(auto-fit, minmax(350px, 1fr))',
       },
     },
   },

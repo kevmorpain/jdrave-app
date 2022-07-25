@@ -5,8 +5,13 @@
     <div v-if="loading">Chargement</div>
 
     <div v-if="!loading && user" class="mb-6">
-      <BaseInput v-model="user.username" label="Pseudo" />
-      <BaseInput v-model="user.email" label="Adresse mail" readonly />
+      <BaseInput class="mb-6" v-model="user.username" label="Pseudo" />
+      <BaseInput
+        class="mb-6"
+        v-model="user.email"
+        label="Adresse mail"
+        readonly
+      />
       <BaseButton class="primary" :is-loading="isUpdating" @click="updateUser">
         Enregistrer
       </BaseButton>

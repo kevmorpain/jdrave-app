@@ -10,36 +10,7 @@
     v-else
     class="md:border rounded-xl md:p-6 grid md:grid-cols-3 gap-y-6 md:gap-6"
   >
-    <div class="md:col-span-2 grid grid-cols-2 gap-x-6 place-content-start">
-      <BaseInput label="Nom" v-model="name" />
-      <BaseInput
-        class="row-start-2"
-        label="PV actuel"
-        v-model="currentHp"
-        :max="maxHp"
-        type="number"
-      />
-      <BaseInput
-        class="row-start-2"
-        label="PV max"
-        v-model="maxHp"
-        type="number"
-      />
-
-      <BaseTextarea class="col-span-full" label="Features" v-model="features" />
-
-      <div>
-        <BaseButton
-          class="primary"
-          @click="updateCharacter"
-          :is-loading="isUpdating"
-        >
-          Valider
-        </BaseButton>
-      </div>
-    </div>
-
-    <div class="text-center row-start-1 md:row-start-auto">
+    <div class="text-center">
       <img class="rounded w-96 h-96 object-cover mb-6" :src="picture" />
 
       <BaseButton class="primary" @click="triggerFileInputFocus">
@@ -51,6 +22,39 @@
         type="file"
         @change="handlePictureUpload"
       />
+    </div>
+
+    <div class="md:col-span-2 grid grid-cols-2 gap-x-6 place-content-start">
+      <BaseInput class="mb-6" label="Nom" v-model="name" />
+      <BaseInput
+        class="row-start-2 mb-6"
+        label="PV actuel"
+        v-model="currentHp"
+        :max="maxHp"
+        type="number"
+      />
+      <BaseInput
+        class="row-start-2 mb-6"
+        label="PV max"
+        v-model="maxHp"
+        type="number"
+      />
+
+      <BaseTextarea
+        class="col-span-full mb-6"
+        label="Features"
+        v-model="features"
+      />
+
+      <div>
+        <BaseButton
+          class="primary"
+          @click="updateCharacter"
+          :is-loading="isUpdating"
+        >
+          Valider
+        </BaseButton>
+      </div>
     </div>
   </div>
 </template>
@@ -71,6 +75,7 @@ import ICharacter from '@/types/Character.interface';
 const props = defineProps<{
   characterId: string;
 }>();
+
 const name = ref<string>('');
 const features = ref<string>('');
 const maxHp = ref<number>(0);

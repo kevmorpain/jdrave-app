@@ -4,10 +4,10 @@
   </header>
 
   <div>
-    <BaseInput label="Titre" v-model="newGame.title" />
+    <BaseInput class="mb-6" label="Titre" v-model="newGame.title" />
 
     <BaseTextarea
-      class="col-span-full"
+      class="col-span-full mb-6"
       label="Description"
       v-model="newGame.description"
     />
@@ -21,7 +21,7 @@ import { reactive } from 'vue';
 import { useMutation } from '@vue/apollo-composable';
 import { useRouter } from 'vue-router';
 import CreateGame from '@/services/games/CreateGame.mutation.gql';
-import GET_GAMES from '@/services/games';
+import { GET_GAMES } from '@/services/games';
 
 const newGame = reactive<{
   title: string;

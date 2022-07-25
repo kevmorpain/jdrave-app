@@ -4,9 +4,10 @@
   </header>
 
   <div>
-    <BaseInput label="Nom" v-model="newCharacter.name" />
+    <BaseInput class="mb-6" label="Nom" v-model="newCharacter.name" />
 
     <BaseInput
+      class="mb-6"
       label="PV max"
       type="number"
       min="0"
@@ -14,6 +15,7 @@
     />
 
     <BaseInput
+      class="mb-6"
       label="PV max"
       type="number"
       min="0"
@@ -21,7 +23,7 @@
     />
 
     <BaseTextarea
-      class="col-span-full"
+      class="col-span-full mb-6"
       label="Features"
       v-model="newCharacter.features"
     />

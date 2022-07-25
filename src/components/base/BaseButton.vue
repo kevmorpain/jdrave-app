@@ -21,7 +21,16 @@ defineProps<{
 .secondary {
   @apply bg-secondary text-white hover:bg-secondary-hover;
 }
+
+.tertiary {
+  @apply bg-gray-100 text-primary hover:bg-gray-200;
+}
+
 .warning {
   @apply bg-red-500 text-white hover:bg-red-600;
+}
+
+.icon {
+  @apply p-2;
 }
 </style>

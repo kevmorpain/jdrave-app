@@ -1,0 +1,23 @@
+query getGameBoard($gameId: uuid!) {
+  game: games_by_pk(id: $gameId) {
+    id
+    title
+    dungeon_master {
+      id
+      username
+    }
+  }
+  characters(where: {game_id: {_eq: $gameId}}) {
+    id
+    name
+    features
+    maxHp: max_hp
+    currentHp: current_hp
+    picture
+    isNpc: is_npc
+    inventory
+    equipment
+    playerId: player_id
+    status
+  }
+}

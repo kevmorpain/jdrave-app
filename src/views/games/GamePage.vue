@@ -1,6 +1,18 @@
 <template>
-  <header class="mb-8">
-    <h1 class="page-title" v-html="title" />
+  <header class="mb-8 grid grid-cols-3">
+    <h1 class="col-start-2 page-title" v-html="title" />
+
+    <div class="text-right">
+      <RouterLink
+        custom
+        :to="{ name: 'board', params: { gameId } }"
+        v-slot="{ navigate }"
+      >
+        <BaseButton class="secondary" @click="navigate">
+          Lancer la partie
+        </BaseButton>
+      </RouterLink>
+    </div>
   </header>
 
   <p v-if="loading">Characters are loading</p>
@@ -34,11 +46,14 @@
 </template>
 
 <script setup lang="ts">
+import BaseButton from '@/components/base/BaseButton.vue';
+
 import { computed } from 'vue';
 import { useQuery } from '@vue/apollo-composable';
-import CharactersFromGame from '@/services/characters/CharactersFromGame.gql';
-import IcCharacter from '@/components/icons/IcCharacter.vue';
 import { useFormattedTitle } from '@/utils/title';
+import CharactersFromGame from '@/services/characters/CharactersFromGame.gql';
+
+import IcCharacter from '@/components/icons/IcCharacter.vue';
 import ICharactersFromGameResponse from '@/types/services/characters/CharacterFromGame';
 import ICharacter from '@/types/Character.interface';
 
