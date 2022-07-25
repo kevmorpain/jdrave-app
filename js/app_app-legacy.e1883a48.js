@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkjdrave_app"]=self["webpackChunkjdrave_app"]||[]).push([[21],{1642:function(r,e,n){n.r(e),n.d(e,{default:function(){return f}});var u=n(6252);function a(r,e){var n=(0,u.up)("RouterView");return(0,u.wg)(),(0,u.j4)(n)}var t=n(8118);const p={},c=(0,t.Z)(p,[["render",a]]);var f=c}}]);
-//# sourceMappingURL=app_app-legacy.e1883a48.js.map
