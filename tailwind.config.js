@@ -1,5 +1,6 @@
 module.exports = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  safelist: ['col-start-1', 'col-start-2'],
   theme: {
     extend: {
       colors: {

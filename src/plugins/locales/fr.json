@@ -1,4 +1,8 @@
 {
+  "common": {
+    "attacker": "Attaquant",
+    "opponent": "Défenseur"
+  },
   "features": {
     "cc": "Capacité de Combat",
     "f": "Force",
@@ -48,5 +52,21 @@
   },
   "success": "Succès",
   "fail": "Échec",
-  "critical": "critique"
+  "critical": "critique",
+  "modifiers": {
+    "difficulty": "Difficulté",
+    "advantages": "Avantages",
+    "weapon": "Bonus d'arme",
+    "armor": "Bonus d'armure",
+    "other": "Autres bonus"
+  },
+  "difficulty_kind": {
+    "VeryEasy": "Très simple",
+    "Easy": "Simple",
+    "Average": "Normal",
+    "Challenging": "Éprouvant",
+    "Difficult": "Difficile",
+    "Hard": "Compliqué",
+    "VeryHard": "Très compliqué"
+  }
 }

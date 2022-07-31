@@ -1,5 +1,8 @@
 <template>
   <div class="p-2 pb-10 rounded-t-md bg-white shadow-md overflow-y-auto">
+    <div class="text-primary font-bold font-secondary text-3xl text-center">
+      {{ $t(`common.${isAttacker ? 'attacker' : 'opponent'}`) }}
+    </div>
     <div class="flex justify-between">
       <p class="font-semibold">{{ character.name }}</p>
       <p>PV : {{ character.currentHp }}/{{ character.maxHp }}</p>
@@ -71,7 +74,9 @@ import IStat from '@/types/Stat.interface';
 const props = defineProps<{
   character: ICharacter;
   selectedStat: IStat | null;
+  isAttacker?: boolean;
 }>();
+
 const emit = defineEmits<{
   (e: 'select-stat', stat: IStat): void;
 }>();

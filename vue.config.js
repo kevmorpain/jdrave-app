@@ -15,5 +15,10 @@ module.exports = {
       .use('graphql-tag/loader')
       .loader('graphql-tag/loader')
       .end();
+
+    config.resolve.set('fallback', {
+      crypto: require.resolve('crypto-browserify'),
+      stream: require.resolve('stream-browserify'),
+    });
   },
 };
