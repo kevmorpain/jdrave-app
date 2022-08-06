@@ -19,5 +19,15 @@ query getGameBoard($gameId: uuid!) {
     equipment
     playerId: player_id
     status
+    equipment_items {
+      id
+      name
+      bonus
+      effect
+      is_equipped
+      quantity
+      status
+      kind
+    }
   }
 }

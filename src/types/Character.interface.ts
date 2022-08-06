@@ -10,4 +10,14 @@ export default interface ICharacter {
   isNpc?: boolean;
   inventory: string;
   equipment: string;
+  equipment_items?: {
+    id: string;
+    name: string;
+    bonus: number;
+    effect: string | null;
+    is_equipped: boolean;
+    quantity: number;
+    status: string | null;
+    kind: string;
+  }[];
 }

@@ -8,9 +8,19 @@
       <p>PV : {{ character.currentHp }}/{{ character.maxHp }}</p>
     </div>
 
-    <div class="mt-4">
-      <p class="font-semibold">Stats</p>
+    <ul class="mt-6 flex items-center gap-x-2">
+      <li
+        v-for="tab in ECardTab"
+        :key="tab"
+        class="cursor-pointer"
+        :class="{ 'text-primary font-semibold': shownTab === tab }"
+        @click="shownTab = tab"
+      >
+        {{ $t(`card_tabs.${tab}`) }}
+      </li>
+    </ul>
 
+    <div v-show="shownTab === ECardTab.Stats" class="mt-4">
       <ul
         class="border border-gray-200 rounded-md flex max-w-fit"
         v-if="character.features?.stats"
@@ -52,24 +62,36 @@
       </ul>
     </div>
 
-    <div class="mt-4">
-      <p class="font-semibold">Équipement</p>
-      <p class="whitespace-pre-wrap">{{ character.equipment }}</p>
+    <div v-show="shownTab === ECardTab.Equipment" class="mt-4">
+      <ul v-if="character.equipment_items.length > 0" class="mb-6">
+        <li v-for="equipment in character.equipment_items" :key="equipment.id">
+          {{ equipment.name }} ({{ $t(`item_kind.${equipment.kind}`) }}
+          {{ equipment.bonus >= 0 ? '+' : '-' }}{{ equipment.bonus }})
+          <template v-if="equipment.status">-> {{ equipment.status }}</template>
+        </li>
+      </ul>
+
+      <p v-else class="whitespace-pre-wrap">{{ character.equipment }}</p>
     </div>
 
-    <div class="mt-4">
-      <p class="font-semibold">Inventaire</p>
+    <div v-show="shownTab === ECardTab.Inventory" class="mt-4">
       <p class="whitespace-pre-wrap">{{ character.inventory }}</p>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import ICharacter from '@/types/Character.interface';
 import IStat from '@/types/Stat.interface';
+
+enum ECardTab {
+  Stats = 'stats',
+  Equipment = 'equipment',
+  Inventory = 'inventory',
+}
 
 const props = defineProps<{
   character: ICharacter;
@@ -91,6 +113,8 @@ const sortedFeatures = computed(() =>
       value: props.character.features.features[key],
     }))
 );
+
+const shownTab = ref<ECardTab>(ECardTab.Stats);
 
 const handleSelectStat = (stat: IStat): void => {
   emit('select-stat', stat);

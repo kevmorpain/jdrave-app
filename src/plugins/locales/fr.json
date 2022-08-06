@@ -68,5 +68,14 @@
     "Difficult": "Difficile",
     "Hard": "Compliqué",
     "VeryHard": "Très compliqué"
+  },
+  "card_tabs": {
+    "stats": "Stats",
+    "equipment": "Équipement",
+    "inventory": "Inventaire"
+  },
+  "item_kind": {
+    "weapon": "Arme",
+    "armor": "Armure"
   }
 }
