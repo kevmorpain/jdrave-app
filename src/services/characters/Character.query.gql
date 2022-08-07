@@ -9,6 +9,25 @@ query CharacterQuery($characterId: uuid!) {
     description
     is_npc
     inventory
-    equipment
+    items {
+      id
+      character_id
+      object_id
+      name
+      bonus
+      effect
+      is_equipped
+      quantity
+      status
+      kind
+    }
+  }
+  objects {
+    id
+    name
+    description
+    kind
+    status
+    can_be_equipped
   }
 }

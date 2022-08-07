@@ -2,7 +2,7 @@
   <p v-if="loading">Character is loading</p>
 
   <div
-    v-else
+    v-else-if="character"
     class="md:border rounded-xl md:p-6 grid md:grid-cols-3 gap-y-6 md:gap-6 relative"
   >
     <div v-if="character.is_npc" class="absolute z-1 top-3 right-0">
@@ -49,7 +49,18 @@
 
       <div>
         <h2 class="font-semibold">Équipement</h2>
-        <p class="whitespace-pre-wrap">{{ character.equipment }}</p>
+
+        <ul v-if="character.items?.length" class="mb-6">
+          <li v-for="equipment in character.items" :key="equipment.id">
+            {{ equipment.name }} ({{ $t(`item_kind.${equipment.kind}`) }}
+            {{ equipment.bonus >= 0 ? '+' : '-' }}{{ equipment.bonus }})
+            <template v-if="equipment.status"
+              >-> {{ equipment.status }}</template
+            >
+          </li>
+        </ul>
+
+        <p v-else class="whitespace-pre-wrap">{{ character.equipment }}</p>
       </div>
 
       <div>
@@ -79,14 +90,16 @@ const { result, loading } = useQuery<ICharacterQuery>(CharacterQuery, () => ({
   characterId: props.characterId,
 }));
 
-const character = computed<ICharacter>(
-  () => result.value?.character ?? ({} as ICharacter)
+const character = computed<ICharacter | null>(
+  () => result.value?.character ?? null
 );
-const characterName = computed<string>(() => character.value.name ?? '');
+const characterName = computed<string>(() => character.value?.name ?? '');
 
 const title = useFormattedTitle(characterName);
 
 const hasFeatures = computed<boolean>(
-  () => !Object.keys(character.value.features).length
+  () =>
+    !!character.value?.features &&
+    !Object.keys(character.value?.features).length
 );
 </script>

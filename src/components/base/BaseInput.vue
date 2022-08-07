@@ -3,7 +3,7 @@
     <label
       v-if="label"
       :for="id"
-      class="inline-block mb-2 font-medium transition-colors dark:text-gray-300"
+      class="inline-block mb-2 transition-colors cursor-pointer"
       :class="{ 'text-primary': isFocused }"
     >
       {{ label }}

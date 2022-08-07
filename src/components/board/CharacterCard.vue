@@ -63,8 +63,8 @@
     </div>
 
     <div v-show="shownTab === ECardTab.Equipment" class="mt-4">
-      <ul v-if="character.equipment_items.length > 0" class="mb-6">
-        <li v-for="equipment in character.equipment_items" :key="equipment.id">
+      <ul v-if="character.items?.length" class="mb-6">
+        <li v-for="equipment in character.items" :key="equipment.id">
           {{ equipment.name }} ({{ $t(`item_kind.${equipment.kind}`) }}
           {{ equipment.bonus >= 0 ? '+' : '-' }}{{ equipment.bonus }})
           <template v-if="equipment.status">-> {{ equipment.status }}</template>

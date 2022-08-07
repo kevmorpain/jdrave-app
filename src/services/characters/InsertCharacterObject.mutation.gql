@@ -1,0 +1,15 @@
+mutation InsertCharacterObjects($objects: [character_object_insert_input!]!) {
+  insertCharacterObjects: insert_character_object(objects: $objects, on_conflict: {constraint: character_object_id_key, update_columns: [bonus, status, effect, is_equipped, quantity]}) {
+    returning {
+      id
+      bonus
+      character_id
+      effect
+      is_equipped
+      object_id
+      quantity
+      status
+    }
+  }
+}
+ 

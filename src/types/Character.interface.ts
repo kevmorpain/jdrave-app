@@ -1,3 +1,5 @@
+import ICharacterObject from './CharacterObject.interface';
+
 export default interface ICharacter {
   id: string;
   name: string;
@@ -10,14 +12,5 @@ export default interface ICharacter {
   isNpc?: boolean;
   inventory: string;
   equipment: string;
-  equipment_items?: {
-    id: string;
-    name: string;
-    bonus: number;
-    effect: string | null;
-    is_equipped: boolean;
-    quantity: number;
-    status: string | null;
-    kind: string;
-  }[];
+  items?: ICharacterObject[];
 }

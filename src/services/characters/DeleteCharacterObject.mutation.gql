@@ -1,0 +1,5 @@
+mutation DeleteCharacterObject($characterId: uuid!, $id: uuid!, $objectId: uuid!) {
+  deleteCharacterObject: delete_character_object_by_pk(character_id: $characterId, id: $id, object_id: $objectId) {
+    id
+  }
+}

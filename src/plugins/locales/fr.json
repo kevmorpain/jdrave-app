@@ -76,6 +76,10 @@
   },
   "item_kind": {
     "weapon": "Arme",
-    "armor": "Armure"
+    "armor": "Armure",
+    "usable": "Utilisable",
+    "edible": "Consommable",
+    "special": "Spécial",
+    "other": "Inventaire"
   }
 }

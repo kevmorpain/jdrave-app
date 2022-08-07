@@ -16,10 +16,9 @@ query getGameBoard($gameId: uuid!) {
     picture
     isNpc: is_npc
     inventory
-    equipment
     playerId: player_id
     status
-    equipment_items {
+    items {
       id
       name
       bonus

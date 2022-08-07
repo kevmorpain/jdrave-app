@@ -1,4 +1,4 @@
-mutation MyMutation($characterId: uuid!) {
+mutation DeleteCharacter($characterId: uuid!) {
   deleteCharacter: delete_characters_by_pk(id: $characterId) {
     gameId: game_id,
     id

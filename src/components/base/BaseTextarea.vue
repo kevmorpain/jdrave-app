@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label :for="id" class="block mb-2 text-sm font-medium text-gray-900">
+    <label :for="id" class="inline-block mb-2 cursor-pointer">
       {{ label }}
     </label>
     <textarea

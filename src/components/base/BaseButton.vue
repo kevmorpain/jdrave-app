@@ -33,4 +33,8 @@ defineProps<{
 .icon {
   @apply p-2;
 }
+
+.small {
+  @apply text-sm py-1 px-2;
+}
 </style>
