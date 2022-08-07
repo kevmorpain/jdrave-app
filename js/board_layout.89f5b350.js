@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkjdrave_app"]=self["webpackChunkjdrave_app"]||[]).push([[100],{2348:function(e,n,r){r.r(n),r.d(n,{default:function(){return l}});var s=r(6252);const a={class:"min-h-screen bg-secondary flex flex-col"};function c(e,n){return(0,s.wg)(),(0,s.iD)("section",a,[(0,s.WI)(e.$slots,"default")])}var t=r(8118);const u={},f=(0,t.Z)(u,[["render",c]]);var l=f}}]);
+//# sourceMappingURL=board_layout.89f5b350.js.map
