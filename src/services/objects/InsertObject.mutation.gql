@@ -1,0 +1,5 @@
+mutation InsertObject($object: objects_insert_input!) {
+  insert_objects_one(object: $object) {
+    id
+  }
+}

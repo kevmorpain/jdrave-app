@@ -81,5 +81,8 @@
     "edible": "Consommable",
     "special": "Spécial",
     "other": "Inventaire"
+  },
+  "character_sheet": {
+    "add_item": "Créer un objet"
   }
 }

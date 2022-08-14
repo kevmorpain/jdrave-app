@@ -132,6 +132,37 @@
               <p>{{ object.name }}</p>
               <p class="italic">{{ object.description }}</p>
             </li>
+
+            <li
+              v-show="!isCreateItemVisible"
+              class="border rounded py-2 px-4 cursor-pointer transition-colors hover:bg-secondary/10 flex flex-col justify-center items-center"
+              @click="isCreateItemVisible = true"
+            >
+              <PlusIcon class="w-5 h-5" />
+              {{ $t('character_sheet.add_item') }}
+            </li>
+
+            <li
+              v-show="isCreateItemVisible"
+              class="border rounded py-2 px-4 cursor-pointer transition-colors hover:bg-secondary/10"
+            >
+              <div class="flex gap-x-2 mb-2">
+                <BaseInput label="Nom" v-model="newObject.name" />
+                <BaseInput label="Type" v-model="newObject.kind" />
+                <BaseCheckbox
+                  label="Équipable"
+                  v-model="newObject.can_be_equipped"
+                />
+              </div>
+              <BaseTextarea
+                class="mb-2"
+                label="Description"
+                v-model="newObject.description"
+              />
+              <BaseButton class="secondary" @click="createObject"
+                >Ajouter</BaseButton
+              >
+            </li>
           </ul>
         </BaseModal>
       </div>
@@ -166,6 +197,7 @@ import CharacterPictureMutation from '@/services/characters/CharacterPicture.mut
 import DeleteCharacter from '@/services/characters/DeleteCharacter.mutation.gql';
 import DeleteCharacterObjectMutation from '@/services/characters/DeleteCharacterObject.mutation.gql';
 import InsertCharacterObjectsMutation from '@/services/characters/InsertCharacterObject.mutation.gql';
+import InsertObjectMutation from '@/services/objects/InsertObject.mutation.gql';
 
 import ICharacter from '@/types/Character.interface';
 import ICharacterObject from '@/types/CharacterObject.interface';
@@ -362,5 +394,23 @@ const handleUpdateCharacter = async (): Promise<void> => {
   } catch (e) {
     console.error(e);
   }
+};
+
+const isCreateItemVisible = ref<boolean>(false);
+const newObject = ref<Omit<IObject, 'id'>>({
+  name: '',
+  description: '',
+  kind: EObjectKind.Weapon,
+  can_be_equipped: true,
+});
+
+const { mutate: insertObject } = useMutation<
+  { id: string },
+  { object: Omit<IObject, 'id'> }
+>(InsertObjectMutation);
+
+const createObject = async (): Promise<void> => {
+  await insertObject({ object: newObject.value });
+  isCreateItemVisible.value = false;
 };
 </script>
