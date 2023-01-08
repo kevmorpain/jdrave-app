@@ -5,7 +5,7 @@ query CharacterQuery($characterId: uuid!) {
     features
     maxHp: max_hp
     currentHp: current_hp
-    picture
+    picture_url
     description
     is_npc
     inventory

@@ -16,7 +16,7 @@
       <li @click="navigate">
         <article
           class="bg-white rounded shadow-md hover:bg-slate-50 hover:cursor-pointer transition-colors duration-200 ease-in-out relative overflow-hidden min-h-[180px] flex bg-center bg-cover"
-          :style="{ backgroundImage: `url(${character.picture})` }"
+          :style="{ backgroundImage: `url(${character.picture_url})` }"
         >
           <div class="absolute bg-secondary top-0 right-0 p-[2px] rounded-bl">
             <CharacterIcon />

@@ -1,6 +1,6 @@
 mutation CharacterPictureMutation($characterId: uuid!, $pictureUrl: String!) {
-  update_characters_by_pk(pk_columns: {id: $characterId}, _set: {picture: $pictureUrl}) {
+  update_characters_by_pk(pk_columns: {id: $characterId}, _set: {picture_url: $pictureUrl}) {
     id
-    picture
+    picture_url
   }
 }

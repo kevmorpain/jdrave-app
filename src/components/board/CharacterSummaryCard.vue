@@ -7,7 +7,7 @@
     }"
   >
     <img
-      :src="character.picture"
+      :src="character.picture_url"
       class="w-20 h-20 object-center object-cover flex-none rounded"
     />
 

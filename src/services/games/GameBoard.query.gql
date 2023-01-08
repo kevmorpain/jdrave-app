@@ -13,7 +13,7 @@ query getGameBoard($gameId: uuid!) {
     features
     maxHp: max_hp
     currentHp: current_hp
-    picture
+    picture_url
     isNpc: is_npc
     inventory
     playerId: player_id

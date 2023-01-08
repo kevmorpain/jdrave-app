@@ -11,7 +11,7 @@
     class="md:border rounded-xl md:p-6 grid md:grid-cols-3 gap-y-6 md:gap-6"
   >
     <div class="text-center">
-      <img class="rounded w-96 h-96 object-cover mb-6" :src="picture" />
+      <img class="rounded w-96 h-96 object-cover mb-6" :src="picture_url" />
 
       <BaseButton class="primary" @click="triggerFileInputFocus">
         Changer la photo
@@ -211,7 +211,7 @@ const name = ref<string>('');
 const features = ref<string>('');
 const maxHp = ref<number>(0);
 const currentHp = ref<number>(0);
-const picture = ref<string>('');
+const picture_url = ref<string>('');
 const pictureInputRef = ref<InstanceType<typeof HTMLInputElement> | null>(null);
 const equipments = ref<ICharacterObject[]>([]);
 
@@ -231,7 +231,7 @@ watchEffect(() => {
     features.value = JSON.stringify(character.value.features);
     maxHp.value = character.value.maxHp;
     currentHp.value = character.value.currentHp;
-    picture.value = character.value.picture;
+    picture_url.value = character.value.picture_url;
     if (character.value.items) {
       equipments.value = structuredClone(character.value.items);
     }

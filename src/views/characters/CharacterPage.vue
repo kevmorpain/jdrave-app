@@ -25,7 +25,10 @@
     </div>
 
     <div class="text-center">
-      <img class="rounded w-96 h-96 object-cover" :src="character.picture" />
+      <img
+        class="rounded w-96 h-96 object-cover"
+        :src="character.picture_url"
+      />
     </div>
 
     <div class="md:col-span-2 grid grid-cols-2 gap-6 place-content-start">

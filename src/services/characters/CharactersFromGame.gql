@@ -5,7 +5,7 @@ query CharactersFromGame($gameId: uuid!) {
     features
     maxHp: max_hp
     currentHp: current_hp
-    picture
+    picture_url
   }
   game: games_by_pk(id: $gameId) {
     title

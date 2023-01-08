@@ -6,7 +6,7 @@ export default interface ICharacter {
   maxHp: number;
   currentHp: number;
   features: Record<string, Record<string, number>>;
-  picture: string;
+  picture_url: string;
   description: string;
   is_npc?: boolean;
   isNpc?: boolean;

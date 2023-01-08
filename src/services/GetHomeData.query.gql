@@ -22,6 +22,6 @@ query GetHomeData($created_at: order_by = desc, $status: statuses_enum = publish
   characters(limit: $limit, order_by: { created_at: $created_at }, where: { status: { _eq: $status } }) {
     id
     name
-    picture
+    picture_url
   }
 }
