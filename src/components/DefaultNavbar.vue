@@ -9,10 +9,7 @@
   >
     <ul class="flex items-center m-0">
       <RouterLink custom :to="{ name: 'home' }" v-slot="{ navigate }">
-        <li
-          class="m-0 hover:cursor-pointer py-2 px-4 hover:text-secondary transition-colors duration-200 ease-out"
-          @click="navigate"
-        >
+        <li class="m-0 hover:cursor-pointer py-2 px-4" @click="navigate">
           <LogoSvg class="w-[170px] md:w-[250px] h-14" />
         </li>
       </RouterLink>

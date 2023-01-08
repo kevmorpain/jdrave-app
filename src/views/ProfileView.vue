@@ -17,9 +17,7 @@
       </BaseButton>
     </div>
 
-    <div>
-      stats?
-    </div>
+    <div>stats?</div>
   </div>
 </template>
 
@@ -33,7 +31,7 @@ import IUser from '@/types/User.interface';
 
 const { result, loading, refetch } = useQuery<IUserQuery>(GetCurrentUser);
 
-let user = ref<IUser | null>(null);
+const user = ref<IUser | null>(null);
 
 watchEffect(() => {
   if (result.value) {

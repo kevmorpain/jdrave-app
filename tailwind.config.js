@@ -8,14 +8,17 @@ module.exports = {
         'primary-hover': '#796387',
         secondary: '#FBBE9D',
         'secondary-hover': '#fab189',
+        'secondary-light': '#fddece',
         tertiary: '#ECE2D0',
         dark: '#231C07',
+        'dark-light': '#7b776a',
         'white-opacity': '#FFFFFFCC',
         hero: '#231C074D',
       },
       fontFamily: {
         primary: ['Nunito', 'Arial', 'sans-serif'],
         secondary: ['Caveat', 'serif'],
+        app: ['Lato', 'Nunito', 'Arial', 'sans-serif'],
       },
       fontSize: {
         '4.5xl': ['2.5rem', '1.4'],
@@ -38,5 +41,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/line-clamp')],
 };

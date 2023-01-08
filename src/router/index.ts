@@ -6,7 +6,7 @@ function prefixRoutes(
   prefix: string,
   routes: RouteRecordRaw[]
 ): RouteRecordRaw[] {
-  return routes.map(route => {
+  return routes.map((route) => {
     route.path = prefix + '/' + route.path;
 
     return route;
@@ -74,11 +74,69 @@ const routes: RouteRecordRaw[] = [
     name: 'app',
     meta: {
       isAuthenticationNeeded: true,
+      layout: defineAsyncComponent(
+        () =>
+          import(
+            /* webpackChunkName: "app_layout" */ '@/components/layouts/AppLayout.vue'
+          )
+      ),
     },
     beforeEnter: authGuard,
     component: () =>
       import(/* webpackChunkName: "app_app" */ '@/views/app/AppWrapper.vue'),
+    redirect: {
+      name: 'dashboard',
+    },
     children: [
+      {
+        path: 'dashboard',
+        name: 'dashboard',
+        component: () =>
+          import(
+            /* webpackChunkName: "app_dashboard" */ '@/views/app/DashboardPage.vue'
+          ),
+      },
+      {
+        path: 'campagnes',
+        name: 'campaigns',
+        meta: {
+          isLayoutList: true,
+        },
+        component: () =>
+          import(
+            /* webpackChunkName: "app_campaigns" */ '@/views/app/DashboardPage.vue'
+          ),
+      },
+      {
+        path: 'personnages',
+        name: 'characters',
+        meta: {
+          isLayoutList: true,
+        },
+        component: () =>
+          import(
+            /* webpackChunkName: "app_characters" */ '@/views/app/DashboardPage.vue'
+          ),
+      },
+      {
+        path: 'objets',
+        name: 'objects',
+        meta: {
+          isLayoutList: true,
+        },
+        component: () =>
+          import(
+            /* webpackChunkName: "app_objects" */ '@/views/app/DashboardPage.vue'
+          ),
+      },
+      {
+        path: 'profile',
+        name: 'profile',
+        component: () =>
+          import(
+            /* webpackChunkName: "app_profile" */ '@/views/ProfileView.vue'
+          ),
+      },
       {
         path: 'new_game',
         name: 'new_game',
@@ -114,33 +172,23 @@ const routes: RouteRecordRaw[] = [
             /* webpackChunkName: "app_characters" */ '@/views/characters/CharacterEdition.vue'
           ),
       },
-      {
-        path: ':gameId/board',
-        name: 'board',
-        props: true,
-        meta: {
-          isAuthenticationNeeded: true,
-          layout: defineAsyncComponent(() =>
-            import(
-              /* webpackChunkName: "board_layout" */ '@/components/layouts/LightLayout.vue'
-            )
-          ),
-        },
-        component: () =>
-          import(/* webpackChunkName: "app_board" */ '@/views/BoardView.vue'),
-      },
-      {
-        path: 'profile',
-        name: 'profile',
-        meta: {
-          isAuthenticationNeeded: true,
-        },
-        component: () =>
-          import(
-            /* webpackChunkName: "app_profile" */ '@/views/ProfileView.vue'
-          ),
-      },
     ],
+  },
+  {
+    path: '/:gameId/board',
+    name: 'board',
+    props: true,
+    meta: {
+      isAuthenticationNeeded: true,
+      layout: defineAsyncComponent(
+        () =>
+          import(
+            /* webpackChunkName: "board_layout" */ '@/components/layouts/LightLayout.vue'
+          )
+      ),
+    },
+    component: () =>
+      import(/* webpackChunkName: "app_board" */ '@/views/BoardView.vue'),
   },
 ];
 

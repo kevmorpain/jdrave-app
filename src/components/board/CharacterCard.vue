@@ -45,19 +45,19 @@
         v-if="character.features?.features"
       >
         <li
-          v-for="({ key: name, value }, index) in sortedFeatures"
-          :key="name"
+          v-for="(feature, index) in sortedFeatures"
+          :key="feature.key"
           class="flex justify-between cursor-pointer"
           :class="{
             'border-t border-gray-200': index !== 0,
-            'bg-secondary': selectedStat?.name === name,
+            'bg-secondary': selectedStat?.name === feature.key,
           }"
-          @click="handleSelectStat({ name, value })"
+          @click="handleSelectStat({ name: feature.key, value: feature.value })"
         >
           <p class="py-1 px-2 font-semibold">
-            {{ $t(`features.${name}`) }}
+            {{ $t(`features.${feature.key}`) }}
           </p>
-          <p class="py-1 px-2 border-l border-gray-200">{{ value }}</p>
+          <p class="py-1 px-2 border-l border-gray-200">{{ feature.key }}</p>
         </li>
       </ul>
     </div>
@@ -108,7 +108,7 @@ const { t } = useI18n();
 const sortedFeatures = computed(() =>
   Object.keys(props.character.features.features)
     .sort((a, b) => t(`features.${a}`).localeCompare(t(`features.${b}`)))
-    .map(key => ({
+    .map((key) => ({
       key,
       value: props.character.features.features[key],
     }))

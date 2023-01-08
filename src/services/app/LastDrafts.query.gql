@@ -1,0 +1,10 @@
+query LastDrafts {
+  last_drafts {
+    id
+    title
+    description
+    entity
+    kind
+    picture_url
+  }
+}

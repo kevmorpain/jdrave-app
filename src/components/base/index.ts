@@ -10,7 +10,7 @@ const requireComponent = require.context(
 );
 
 export default (app: App<Element>): void => {
-  requireComponent.keys().forEach(fileName => {
+  requireComponent.keys().forEach((fileName) => {
     // Get component config
     const componentConfig = requireComponent(fileName);
     // Get component name

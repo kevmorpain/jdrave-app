@@ -11,9 +11,7 @@ import { createAuth0 } from '@auth0/auth0-vue';
 // import authConfig from '../auth_config.json';
 import authConfigDev from '../auth_config.dev.json';
 
-const app = createApp(App)
-  .use(router)
-  .use(i18n);
+const app = createApp(App).use(router).use(i18n);
 
 registerComponents(app);
 

@@ -31,12 +31,8 @@ if (navigator.serviceWorker) {
   });
 }
 
-const {
-  isAuthenticated,
-  isLoading,
-  getAccessTokenSilently,
-  error,
-} = useAuth0();
+const { isAuthenticated, isLoading, getAccessTokenSilently, error } =
+  useAuth0();
 
 watchEffect(() => {
   if (error.value) {

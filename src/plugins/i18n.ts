@@ -1,7 +1,9 @@
 import { createI18n } from 'vue-i18n';
 import fr from './locales/fr.json';
 
-const i18n = createI18n({
+type MessageSchema = typeof fr;
+
+const i18n = createI18n<[MessageSchema], 'fr'>({
   locale: 'fr',
   fallbackLocale: 'fr',
   messages: {

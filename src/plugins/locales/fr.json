@@ -84,5 +84,32 @@
   },
   "character_sheet": {
     "add_item": "Créer un objet"
+  },
+  "entities": {
+    "game": "Campagne",
+    "object": "Objet",
+    "character": "Personnage"
+  },
+
+  "app": {
+    "nav": {
+      "dashboard": "Tableau de bord",
+      "campaigns": "Campagnes",
+      "characters": "Personnages",
+      "objects": "Objets",
+      "profile": "Profil",
+      "logout": "Se déconnecter"
+    },
+
+    "dashboard": {
+      "title": "Bonjour, {name}",
+      "online": {
+        "title": "Partie en cours",
+        "join_action": "Rejoindre"
+      },
+      "last_drafts": {
+        "title": "Reprendre les brouillons"
+      }
+    }
   }
 }

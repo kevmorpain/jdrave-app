@@ -59,6 +59,9 @@ const props = withDefaults(
   }>(),
   {
     type: 'text',
+    label: undefined,
+    max: undefined,
+    min: undefined,
   }
 );
 

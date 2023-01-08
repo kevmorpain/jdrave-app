@@ -174,7 +174,7 @@ const modifiers = ref<IModifiers[]>([
 ]);
 
 const modifiersTotal = computed<number[]>(() =>
-  modifiers.value.map(modifier =>
+  modifiers.value.map((modifier) =>
     Object.values(modifier).reduce((sum, val) => (val ? sum + val : sum))
   )
 );
@@ -188,7 +188,7 @@ enum ETestKind {
 
 const testKind = ref<ETestKind>(ETestKind.Simple);
 const testKindOptions = computed<ETestKind[]>(() =>
-  Object.values(ETestKind).filter(kind => kind !== testKind.value)
+  Object.values(ETestKind).filter((kind) => kind !== testKind.value)
 );
 const isTestKindSelectorVisible = ref<boolean>(false);
 const changeTestKind = (kind: ETestKind) => {

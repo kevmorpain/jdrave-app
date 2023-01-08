@@ -98,9 +98,7 @@
           @validate="addEquipment"
           @close="closeEquipmentModal"
         >
-          <template #modal-header>
-            Ajouter un équipement
-          </template>
+          <template #modal-header> Ajouter un équipement </template>
 
           <ul class="flex justify-center items-center gap-x-2 mb-6">
             <li
@@ -225,7 +223,7 @@ const character = computed<ICharacter | null>(
   () => result.value?.character ?? null
 );
 
-let title = computed(() => '');
+const title = ref<string>('');
 
 watchEffect(() => {
   if (character.value) {
@@ -239,7 +237,7 @@ watchEffect(() => {
     }
   }
 
-  title = useFormattedTitle(name);
+  title.value = useFormattedTitle(name).value;
 });
 
 const {
@@ -304,7 +302,7 @@ const triggerFileInputFocus = (): void => {
 const itemFilters = [EObjectKind.Weapon, EObjectKind.Armor, 'other'];
 const selectedFilter = ref<string>(EObjectKind.Weapon);
 const filteredItems = computed(() =>
-  equipments.value.filter(item => {
+  equipments.value.filter((item) => {
     if (selectedFilter.value === 'other') {
       return (
         item.kind !== EObjectKind.Weapon && item.kind !== EObjectKind.Armor
@@ -318,12 +316,15 @@ const filteredItems = computed(() =>
 const isEquipmentModalVisible = ref<boolean>(false);
 const selectedEquipment = ref<IObject | null>(null);
 type EEquipmentKind = EObjectKind.Weapon | EObjectKind.Armor;
-const equipmentKind = [EObjectKind.Weapon, EObjectKind.Armor];
+const equipmentKind: [EObjectKind.Weapon, EObjectKind.Armor] = [
+  EObjectKind.Weapon,
+  EObjectKind.Armor,
+];
 const selectedEquipmentKind = ref<EEquipmentKind>(EObjectKind.Weapon);
 const objectList = computed<IObject[]>(
   () =>
     result.value?.objects.filter(
-      object => object.kind === selectedEquipmentKind.value
+      (object) => object.kind === selectedEquipmentKind.value
     ) ?? []
 );
 
@@ -364,7 +365,7 @@ const removeEquipment = (index: number): void => {
   if (character.value?.items) {
     const equipment = equipments.value[index];
     const alreadyItemIndex = character.value?.items.findIndex(
-      item => item.id === equipment.id
+      (item) => item.id === equipment.id
     );
 
     if (alreadyItemIndex >= 0) {

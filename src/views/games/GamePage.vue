@@ -71,7 +71,7 @@ const { result, loading } = useQuery<ICharactersFromGameResponse>(
 const characters = computed<ICharacter[]>(() => result.value?.characters ?? []);
 const gameTitle = computed<string>(() => result.value?.game.title ?? '');
 
-let title = useFormattedTitle(gameTitle);
+const title = useFormattedTitle(gameTitle);
 
 const sortedCharacters = computed(() =>
   [...characters.value].sort((characterA, characterB) =>

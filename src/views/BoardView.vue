@@ -27,7 +27,7 @@
           :character="selectedCharacters[0].character"
           :selected-stat="selectedCharacters[0].stat"
           is-attacker
-          @select-stat="stat => handleSelectStat(stat, 0)"
+          @select-stat="(stat) => handleSelectStat(stat, 0)"
         />
 
         <TestCard
@@ -43,7 +43,7 @@
           class="character-item"
           :character="selectedCharacters[1].character"
           :selected-stat="selectedCharacters[1].stat"
-          @select-stat="stat => handleSelectStat(stat, 1)"
+          @select-stat="(stat) => handleSelectStat(stat, 1)"
         />
       </div>
 
