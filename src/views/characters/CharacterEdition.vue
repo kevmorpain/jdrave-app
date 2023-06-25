@@ -1,7 +1,7 @@
 <template>
   <header class="flex justify-between align-middle mb-8">
     <h1 class="page-title" v-html="title" />
-    <BaseButton class="warning" @click="deleteCharacter">Supprimer</BaseButton>
+    <BaseButton class="warning circled" @click="deleteCharacter">Supprimer</BaseButton>
   </header>
 
   <p v-if="loading">Character is loading</p>
@@ -13,7 +13,7 @@
     <div class="text-center">
       <img class="rounded w-96 h-96 object-cover mb-6" :src="picture_url" />
 
-      <BaseButton class="primary" @click="triggerFileInputFocus">
+      <BaseButton class="primary circled" @click="triggerFileInputFocus">
         Changer la photo
       </BaseButton>
       <input
@@ -85,7 +85,7 @@
           </li>
           <li>
             <BaseButton
-              class="tertiary small"
+              class="tertiary small circled"
               @click="isEquipmentModalVisible = true"
             >
               <PlusIcon class="mr-1 w-4 h-4" /> Ajouter un objet
@@ -95,11 +95,10 @@
 
         <BaseModal
           :is-visible="isEquipmentModalVisible"
+          title="Ajouter un équipement"
           @validate="addEquipment"
           @close="closeEquipmentModal"
         >
-          <template #modal-header> Ajouter un équipement </template>
-
           <ul class="flex justify-center items-center gap-x-2 mb-6">
             <li
               v-for="kind in equipmentKind"
@@ -157,7 +156,7 @@
                 label="Description"
                 v-model="newObject.description"
               />
-              <BaseButton class="secondary" @click="createObject"
+              <BaseButton class="secondary circled" @click="createObject"
                 >Ajouter</BaseButton
               >
             </li>
@@ -169,7 +168,7 @@
 
       <div>
         <BaseButton
-          class="primary"
+          class="primary circled"
           @click="handleUpdateCharacter"
           :is-loading="isUpdating"
         >
@@ -181,7 +180,7 @@
 </template>
 
 <script setup lang="ts">
-import { PlusIcon, TrashIcon } from '@heroicons/vue/solid';
+import { PlusIcon, TrashIcon } from '@heroicons/vue/20/solid';
 
 import { computed, ref, watchEffect } from 'vue';
 import { useMutation, useQuery } from '@vue/apollo-composable';

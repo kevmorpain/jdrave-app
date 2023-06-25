@@ -1,7 +1,12 @@
 {
   "common": {
     "attacker": "Attaquant",
-    "opponent": "Défenseur"
+    "opponent": "Défenseur",
+    "statuses": {
+      "draft": "Brouillon",
+      "published": "Publié",
+      "archived": "Archivé"
+    }
   },
   "features": {
     "cc": "Capacité de Combat",
@@ -93,12 +98,39 @@
 
   "app": {
     "nav": {
+      "create_action": "Créer",
       "dashboard": "Tableau de bord",
       "campaigns": "Campagnes",
       "characters": "Personnages",
       "objects": "Objets",
       "profile": "Profil",
       "logout": "Se déconnecter"
+    },
+
+    "create_modal": {
+      "title": "Choisissez ce que vous voulez créer.",
+      "entities": {
+        "game": "Campagne",
+        "character": "Personnage",
+        "object": "Objet"
+      },
+      "steps": {
+        "game": {
+          "title": "Remplissez les informations de la campagne à créer",
+          "fields": {
+            "title": "Titre",
+            "description": "Description"
+          },
+          "actions": {
+            "cancel": "Annuler",
+            "validate": "Créer la campagne"
+          }
+        },
+        "object": {
+          "title": "Remplissez les informations de l'objet à créer"
+        }
+      },
+      "validate_action": "Étape suivante"
     },
 
     "dashboard": {
@@ -109,6 +141,24 @@
       },
       "last_drafts": {
         "title": "Reprendre les brouillons"
+      }
+    },
+
+    "campaigns_list": {
+      "title": "Campagnes",
+      "search_placeholder": "Rechercher une campagne",
+      "filters": {
+        "dungeon_master": "Maître du jeu",
+        "status": "Statut"
+      },
+      "list": {
+        "header": {
+          "title": "Titre",
+          "dungeon_master": "Maître du jeu",
+          "last_game": "Dernière partie",
+          "status": "Statut"
+        },
+        "edit_action": "Éditer"
       }
     }
   }

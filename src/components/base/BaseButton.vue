@@ -1,9 +1,9 @@
 <template>
   <button
-    class="bg-white rounded-full py-2 px-4 text-primary hover:bg-slate-50 transition-colors duration-200 ease-out inline-flex items-center font-medium"
+    class="bg-white rounded-lg py-2 px-3 text-primary hover:bg-slate-50 transition-colors duration-200 ease-out inline-flex items-center font-medium gap-x-2"
     :disabled="isLoading"
   >
-    <BaseSpinner v-if="isLoading" class="inline w-4 h-4 mr-3" />
+    <BaseSpinner v-if="isLoading" class="inline w-4 h-4" />
     <slot />
   </button>
 </template>
@@ -36,5 +36,9 @@ defineProps<{
 
 .small {
   @apply text-sm py-1 px-2;
+}
+
+.circled {
+  @apply rounded-full;
 }
 </style>

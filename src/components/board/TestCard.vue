@@ -11,7 +11,7 @@
         class="tertiary icon shadow-lg"
         @click="$emit('characters-switch')"
       >
-        <SwitchHorizontalIcon class="w-6 h-6" />
+        <ArrowsRightLeftIcon class="w-6 h-6" />
       </BaseButton>
     </div>
 
@@ -119,8 +119,8 @@
 
 <script setup lang="ts">
 import D100 from '@/components/dices/D100.vue';
-import { ChevronDownIcon } from '@heroicons/vue/solid';
-import { SwitchHorizontalIcon } from '@heroicons/vue/outline';
+import { ChevronDownIcon } from '@heroicons/vue/20/solid';
+import { ArrowsRightLeftIcon } from '@heroicons/vue/24/outline';
 
 import { computed, ref, watch } from 'vue';
 import { onClickOutside } from '@vueuse/core';

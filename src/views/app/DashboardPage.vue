@@ -9,7 +9,7 @@
     <div class="flex justify-between items-center mb-4">
       <p class="flex gap-x-2 items-center font-bold text-2xl">
         {{ $t('app.dashboard.online.title') }}
-        <!-- <StatusOnlineIcon class="w-6 h-6 text-orange-500" /> -->
+        <!-- <SignalIcon class="w-6 h-6 text-orange-500" /> -->
       </p>
 
       <!-- <BaseButton class="secondary small">
@@ -41,7 +41,7 @@
 <script setup lang="ts">
 import AppCard from '@/components/app/AppCard.vue';
 import DraftCard from '@/components/app/DraftCard.vue';
-import { StatusOnlineIcon } from '@heroicons/vue/outline';
+// import { SignalIcon } from '@heroicons/vue/24/outline';
 
 import { ref, watch } from 'vue';
 import { useQuery } from '@vue/apollo-composable';

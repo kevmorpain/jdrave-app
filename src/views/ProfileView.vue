@@ -12,7 +12,7 @@
         label="Adresse mail"
         readonly
       />
-      <BaseButton class="primary" :is-loading="isUpdating" @click="updateUser">
+      <BaseButton class="primary circled" :is-loading="isUpdating" @click="updateUser">
         Enregistrer
       </BaseButton>
     </div>

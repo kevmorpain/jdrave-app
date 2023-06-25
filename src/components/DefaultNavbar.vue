@@ -36,10 +36,10 @@
     </ul>
 
     <div v-if="!isLoading">
-      <BaseButton v-if="isAuthenticated" @click="handleLogout">
+      <BaseButton v-if="isAuthenticated" class="circled" @click="handleLogout">
         Se déconnecter
       </BaseButton>
-      <BaseButton v-else @click="handleLogin">Se connecter</BaseButton>
+      <BaseButton v-else class="circled" @click="handleLogin">Se connecter</BaseButton>
     </div>
   </nav>
 </template>

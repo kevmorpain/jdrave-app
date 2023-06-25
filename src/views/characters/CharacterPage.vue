@@ -17,7 +17,7 @@
         :to="{ name: 'edit_character', params: { characterId: character.id } }"
         v-slot="{ navigate }"
       >
-        <BaseButton class="secondary" @click="navigate">
+        <BaseButton class="secondary circled" @click="navigate">
           Éditer
           <PencilIcon class="w-4 h-4 ml-1" />
         </BaseButton>
@@ -75,7 +75,7 @@
 </template>
 
 <script setup lang="ts">
-import { PencilIcon } from '@heroicons/vue/solid';
+import { PencilIcon } from '@heroicons/vue/20/solid';
 
 import { computed } from 'vue';
 import { useQuery } from '@vue/apollo-composable';

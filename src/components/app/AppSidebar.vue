@@ -7,7 +7,17 @@
         <LogoSvg class="w-[200px] h-[46px]" />
       </div>
     </RouterLink>
-    <BaseButton class="primary !px-12">Créer</BaseButton>
+
+    <BaseButton class="primary circled !px-12" @click="handleCreateClick">
+      {{ $t('app.nav.create_action') }}
+
+      <PlusIcon class="w-5 h-5" />
+    </BaseButton>
+
+    <CreationModal
+      :is-visible="isCreationModalVisible"
+      @close="isCreationModalVisible = false"
+    />
 
     <ul class="w-full flex flex-col gap-4 mb-auto px-3">
       <RouterLink
@@ -42,23 +52,30 @@
         />
       </RouterLink>
 
-      <SidebarItem name="logout" :icon="LogoutIcon" @click="handleLogout" />
+      <SidebarItem
+        name="logout"
+        :icon="ArrowRightOnRectangleIcon"
+        @click="handleLogout"
+      />
     </ul>
   </nav>
 </template>
 
 <script setup lang="ts">
+import CreationModal from '@/components/app/creation/CreationModal.vue';
 import LogoSvg from '@/components/LogoSvg.vue';
 import SidebarItem from '@/components/app/SidebarItem.vue';
 import {
+  ArrowRightOnRectangleIcon,
   BookOpenIcon,
-  ViewGridIcon,
+  Squares2X2Icon,
   UserGroupIcon,
   BeakerIcon,
   UserCircleIcon,
-} from '@heroicons/vue/solid';
-import { LogoutIcon } from '@heroicons/vue/outline';
-import { FunctionalComponent } from 'vue';
+  PlusIcon,
+} from '@heroicons/vue/20/solid';
+
+import { FunctionalComponent, ref } from 'vue';
 
 interface INavItem {
   name: string;
@@ -68,7 +85,7 @@ interface INavItem {
 const primaryNav: INavItem[] = [
   {
     name: 'dashboard',
-    icon: ViewGridIcon,
+    icon: Squares2X2Icon,
   },
   {
     name: 'campaigns',
@@ -91,7 +108,12 @@ const bottomNav: INavItem[] = [
   },
 ];
 
+const isCreationModalVisible = ref<boolean>(false);
+const handleCreateClick = (): void => {
+  isCreationModalVisible.value = true;
+};
+
 const handleLogout = (): void => {
-  //
+  // TODO: logout and redirect to homepage
 };
 </script>

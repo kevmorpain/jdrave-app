@@ -8,7 +8,7 @@
         :to="{ name: 'board', params: { gameId } }"
         v-slot="{ navigate }"
       >
-        <BaseButton class="secondary" @click="navigate">
+        <BaseButton class="secondary circled" @click="navigate">
           Lancer la partie
         </BaseButton>
       </RouterLink>

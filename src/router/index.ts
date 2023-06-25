@@ -104,7 +104,7 @@ const routes: RouteRecordRaw[] = [
         },
         component: () =>
           import(
-            /* webpackChunkName: "app_campaigns" */ '@/views/app/DashboardPage.vue'
+            /* webpackChunkName: "app_campaigns" */ '@/views/app/CampaignsList.vue'
           ),
       },
       {

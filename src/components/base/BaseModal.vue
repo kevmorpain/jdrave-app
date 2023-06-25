@@ -2,21 +2,27 @@
   <Teleport to="body">
     <aside
       v-if="isVisible"
-      class="fixed inset-0 bg-primary/75 flex justify-center items-center"
+      class="fixed inset-0 bg-primary/50 flex justify-center items-center"
     >
-      <div ref="modalRef" class="flex-1 bg-white max-w-4xl rounded-xl">
-        <h1 class="text-xl font-semibold text-center p-4">
-          <slot name="modal-header" />
+      <div ref="modalRef" class="flex-1 flex flex-col gap-y-4 bg-white max-w-3xl rounded-xl py-4" :class="[modalClass]">
+        <h1 v-if="title" class="text-xl font-semibold text-center py-4">
+          {{ title }}
         </h1>
 
         <div class="px-8">
           <slot />
         </div>
 
-        <div class="flex justify-between items-center p-4">
-          <BaseButton @click="$emit('close')">
-            {{ closeText }}
+        <div v-if="!hideActions" class="flex justify-between items-center p-4 pb-0">
+          <BaseButton
+            :class="{
+              'invisible': hideCancel
+            }"
+            @click="$emit('cancel')"
+          >
+            {{ cancelText }}
           </BaseButton>
+
           <BaseButton class="primary" @click="$emit('validate')">
             {{ validateText }}
           </BaseButton>
@@ -33,17 +39,22 @@ import { onClickOutside } from '@vueuse/core';
 withDefaults(
   defineProps<{
     isVisible: boolean;
-    closeText?: string;
+    modalClass?: string;
+    title?: string;
+    hideActions?: boolean;
+    hideCancel?: boolean;
+    cancelText?: string;
     validateText?: string;
   }>(),
   {
-    closeText: 'Fermer',
+    cancelText: 'Annuler',
     validateText: 'Valider',
   }
 );
 
 const emit = defineEmits<{
   (e: 'close'): void;
+  (e: 'cancel'): void;
   (e: 'validate'): void;
 }>();
 

@@ -4,6 +4,7 @@ import fr from './locales/fr.json';
 type MessageSchema = typeof fr;
 
 const i18n = createI18n<[MessageSchema], 'fr'>({
+  legacy: false,
   locale: 'fr',
   fallbackLocale: 'fr',
   messages: {

@@ -115,7 +115,7 @@
 
         <div class="text-center">
           <RouterLink :to="{ name: 'games' }" custom v-slot="{ navigate }">
-            <BaseButton class="primary" @click="navigate">
+            <BaseButton class="primary circled" @click="navigate">
               Voir plus de campagnes
             </BaseButton>
           </RouterLink>
@@ -160,7 +160,7 @@
             custom
             v-slot="{ navigate }"
           >
-            <BaseButton class="primary" @click="navigate">
+            <BaseButton class="primary circled" @click="navigate">
               Voir plus de personnages
             </BaseButton>
           </RouterLink>

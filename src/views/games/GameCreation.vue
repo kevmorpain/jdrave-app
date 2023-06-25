@@ -12,7 +12,7 @@
       v-model="newGame.description"
     />
 
-    <BaseButton class="primary" @click="createGame">Valider</BaseButton>
+    <BaseButton class="primary circled" @click="createGame">Valider</BaseButton>
   </div>
 </template>
 

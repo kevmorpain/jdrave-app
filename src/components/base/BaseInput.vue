@@ -21,6 +21,7 @@
         :min="min"
         :max="max"
         :type="type"
+        :placeholder="placeholder"
         :value="modelValue"
         :readonly="readonly"
         @input="emitValue"
@@ -56,6 +57,7 @@ const props = withDefaults(
     max?: number;
     min?: number;
     readonly?: boolean;
+    placeholder?: string;
   }>(),
   {
     type: 'text',
