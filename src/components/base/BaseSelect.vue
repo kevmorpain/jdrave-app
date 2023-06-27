@@ -46,6 +46,8 @@
 </template>
 
 <script setup lang="ts">
+// TODO: change for a select design and not dropdown
+
 import { CheckIcon, ChevronDownIcon } from '@heroicons/vue/20/solid';
 import { onClickOutside } from '@vueuse/core';
 

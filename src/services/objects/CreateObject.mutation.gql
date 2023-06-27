@@ -1,0 +1,19 @@
+mutation CreateObject($object: objects_insert_input!) {
+  insert_objects_one(object: $object) {
+    id
+    kind
+    name
+    picture_url
+    status
+    updated_at
+    created_at
+    description
+    can_be_equipped
+    games {
+      game {
+        id
+        title
+      }
+    }
+  }
+}

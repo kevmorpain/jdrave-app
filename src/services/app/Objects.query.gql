@@ -1,0 +1,16 @@
+query Objects ($kind: object_kind_enum = null, $status: statuses_enum = null) {
+  objects(where: {kind: {_eq: $kind}, status: {_eq: $status}}) {
+    id
+    name
+    kind
+    picture_url
+    status
+    updated_at
+    games {
+      game {
+        id
+        title
+      }
+    }
+  }
+}

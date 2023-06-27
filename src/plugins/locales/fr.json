@@ -6,6 +6,13 @@
       "draft": "Brouillon",
       "published": "Publié",
       "archived": "Archivé"
+    },
+    "object_kinds": {
+      "weapon": "Arme",
+      "armor": "Armure",
+      "usable": "Utilisable",
+      "edible": "Consommable",
+      "special": "Spécial"
     }
   },
   "features": {
@@ -116,7 +123,7 @@
       },
       "steps": {
         "game": {
-          "title": "Remplissez les informations de la campagne à créer",
+          "title": "Remplissez les informations de la campagne à créer.",
           "fields": {
             "title": "Titre",
             "description": "Description"
@@ -127,7 +134,19 @@
           }
         },
         "object": {
-          "title": "Remplissez les informations de l'objet à créer"
+          "title": "Remplissez les informations de l'objet à créer.",
+          "fields": {
+            "name": "Nom",
+            "description": "Description",
+            "kind": "Type d'objet",
+            "can_be_equipped": "L'objet peut s'équiper",
+            "picture_url": "Image",
+            "status": "Statut"
+          },
+          "actions": {
+            "cancel": "Annuler",
+            "validate": "Créer l'objet"
+          }
         }
       },
       "validate_action": "Étape suivante"
@@ -156,6 +175,24 @@
           "title": "Titre",
           "dungeon_master": "Maître du jeu",
           "last_game": "Dernière partie",
+          "status": "Statut"
+        },
+        "edit_action": "Éditer"
+      }
+    },
+    
+    "objects_list": {
+      "title": "Objets",
+      "search_placeholder": "Rechercher un objet, une arme, une armure, ...",
+      "filters": {
+        "kind": "Type d'objet",
+        "status": "Statut"
+      },
+      "list": {
+        "header": {
+          "name": "Nom",
+          "games": "Campagnes",
+          "kind": "Type",
           "status": "Statut"
         },
         "edit_action": "Éditer"

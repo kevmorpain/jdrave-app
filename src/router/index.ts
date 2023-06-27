@@ -126,7 +126,7 @@ const routes: RouteRecordRaw[] = [
         },
         component: () =>
           import(
-            /* webpackChunkName: "app_objects" */ '@/views/app/DashboardPage.vue'
+            /* webpackChunkName: "app_objects" */ '@/views/app/ObjectsList.vue'
           ),
       },
       {
