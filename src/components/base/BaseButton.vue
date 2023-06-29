@@ -1,6 +1,9 @@
 <template>
   <button
     class="bg-white rounded-lg py-2 px-3 text-primary hover:bg-slate-50 transition-colors duration-200 ease-out inline-flex items-center font-medium gap-x-2"
+    :class="{
+      'pointer-events-none opacity-90': isLoading,
+    }"
     :disabled="isLoading"
   >
     <BaseSpinner v-if="isLoading" class="inline w-4 h-4" />

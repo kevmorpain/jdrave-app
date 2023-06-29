@@ -132,7 +132,11 @@ const handleCreateClick = (): void => {
   createObject();
 };
 
-const { mutate: createObject, onDone: onCreationDone, loading } = useMutation<
+const {
+  mutate: createObject,
+  onDone: onCreationDone,
+  loading,
+} = useMutation<
   {
     insert_objects_one: IObject;
   },

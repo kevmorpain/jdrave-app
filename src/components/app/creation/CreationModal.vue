@@ -27,9 +27,10 @@ import EntityChoiceStep from './EntityChoiceStep.vue';
 import GameStep from './GameStep.vue';
 import ObjectStep from './ObjectStep.vue';
 
-import { Component, computed, ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+import type { Component } from 'vue';
 import { EEntity } from '@/types/Entity.enum';
 
 const { t } = useI18n();

@@ -1,7 +1,9 @@
 <template>
   <header class="flex justify-between align-middle mb-8">
     <h1 class="page-title" v-html="title" />
-    <BaseButton class="warning circled" @click="deleteCharacter">Supprimer</BaseButton>
+    <BaseButton class="warning circled" @click="deleteCharacter">
+      Supprimer
+    </BaseButton>
   </header>
 
   <p v-if="loading">Character is loading</p>

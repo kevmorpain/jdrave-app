@@ -4,7 +4,11 @@
       v-if="isVisible"
       class="fixed inset-0 bg-primary/50 flex justify-center items-center"
     >
-      <div ref="modalRef" class="flex-1 flex flex-col gap-y-4 bg-white max-w-3xl rounded-xl py-4" :class="[modalClass]">
+      <div
+        ref="modalRef"
+        class="flex-1 flex flex-col gap-y-4 bg-white max-w-3xl rounded-xl py-4"
+        :class="[modalClass]"
+      >
         <h1 v-if="title" class="text-xl font-semibold text-center py-4">
           {{ title }}
         </h1>
@@ -13,10 +17,13 @@
           <slot />
         </div>
 
-        <div v-if="!hideActions" class="flex justify-between items-center p-4 pb-0">
+        <div
+          v-if="!hideActions"
+          class="flex justify-between items-center p-4 pb-0"
+        >
           <BaseButton
             :class="{
-              'invisible': hideCancel
+              invisible: hideCancel,
             }"
             @click="$emit('cancel')"
           >
@@ -47,6 +54,8 @@ withDefaults(
     validateText?: string;
   }>(),
   {
+    modalClass: undefined,
+    title: undefined,
     cancelText: 'Annuler',
     validateText: 'Valider',
   }

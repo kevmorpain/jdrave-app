@@ -28,7 +28,9 @@
       v-model="newCharacter.features"
     />
 
-    <BaseButton class="primary circled" @click="createCharacter">Valider</BaseButton>
+    <BaseButton class="primary circled" @click="createCharacter">
+      Valider
+    </BaseButton>
   </div>
 </template>
 
