@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center mb-4 gap-x-2">
+  <div class="flex items-center gap-x-2">
     <input
       :id="id"
       type="checkbox"

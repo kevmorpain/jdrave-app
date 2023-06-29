@@ -141,6 +141,7 @@
             "kind": "Type d'objet",
             "can_be_equipped": "L'objet peut s'équiper",
             "picture_url": "Image",
+            "picture_upload_action": "Choisir une image",
             "status": "Statut"
           },
           "actions": {

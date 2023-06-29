@@ -22,3 +22,7 @@ export const uploadImage = async (image: File): Promise<IUploadResponse> => {
     url: res.url,
   };
 };
+
+export const useCloudinary = () => ({
+  uploadImage,
+});

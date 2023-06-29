@@ -64,6 +64,7 @@ const props = withDefaults(
     label: undefined,
     max: undefined,
     min: undefined,
+    placeholder: undefined,
   }
 );
 
