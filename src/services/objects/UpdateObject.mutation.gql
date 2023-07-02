@@ -1,0 +1,11 @@
+mutation UpdateObject ($id: uuid!, $object: objects_set_input!) {
+  update_objects_by_pk(pk_columns: {id: $id}, _set: $object) {
+    id
+    name
+    kind
+    picture_url
+    status
+    description
+    can_be_equipped
+  }
+}

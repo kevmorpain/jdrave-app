@@ -1,0 +1,17 @@
+query Object ($objectId: uuid!) {
+  object: objects_by_pk(id: $objectId) {
+    id
+    name
+    kind
+    picture_url
+    status
+    description
+    can_be_equipped
+    games {
+      game {
+        id
+        title
+      }
+    }
+  }
+}

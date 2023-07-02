@@ -120,14 +120,32 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: 'objets',
-        name: 'objects',
-        meta: {
-          isLayoutList: true,
-        },
         component: () =>
           import(
-            /* webpackChunkName: "app_objects" */ '@/views/app/ObjectsList.vue'
+            /* webpackChunkName: "app_objects" */ '@/views/app/object/ObjectWrapper.vue'
           ),
+        children: [
+          {
+            path: '',
+            name: 'objects_list',
+            meta: {
+              isLayoutList: true,
+            },
+            component: () =>
+              import(
+                /* webpackChunkName: "app_objects" */ '@/views/app/object/ObjectsList.vue'
+              ),
+          },
+          {
+            path: ':objectId',
+            name: 'object_page',
+            props: true,
+            component: () =>
+              import(
+                /* webpackChunkName: "app_objects" */ '@/views/app/object/ObjectPage.vue'
+              ),
+          },
+        ],
       },
       {
         path: 'profile',

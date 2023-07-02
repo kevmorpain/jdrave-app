@@ -40,45 +40,54 @@
       <span class=""></span>
     </li>
 
-    <li
+    <RouterLink
       v-for="object in objects"
       :key="object.id"
-      class="list border-b border-gray-200"
+      custom
+      :to="{
+        name: 'object_page',
+        params: {
+          objectId: object.id,
+        },
+      }"
+      v-slot="{ navigate }"
     >
-      <div class="flex items-center gap-x-6">
-        <img
-          class="w-12 h-12 object-cover object-center rounded-full bg-gray-200"
-          :src="object.picture_url"
-        />
+      <li class="list border-b border-gray-200">
+        <div class="flex items-center gap-x-6">
+          <img
+            class="w-12 h-12 object-cover object-center rounded-full bg-gray-200"
+            :src="object.picture_url"
+          />
 
-        <p class="font-semibold">{{ object.name }}</p>
-      </div>
+          <p class="font-semibold">{{ object.name }}</p>
+        </div>
 
-      <div>
-        <span
-          v-for="{ game } in object.games"
-          :key="game.id"
-          class="text-primary"
-        >
-          {{ game.title }}
-        </span>
-      </div>
+        <div>
+          <span
+            v-for="{ game } in object.games"
+            :key="game.id"
+            class="text-primary"
+          >
+            {{ game.title }}
+          </span>
+        </div>
 
-      <BaseBadge class="secondary justify-self-start">
-        {{ $t(`common.object_kinds.${object.kind}`) }}
-      </BaseBadge>
+        <BaseBadge class="secondary justify-self-start">
+          {{ $t(`common.object_kinds.${object.kind}`) }}
+        </BaseBadge>
 
-      <BaseBadge class="secondary">{{
-        $t(`common.statuses.${object.status}`)
-      }}</BaseBadge>
+        <BaseBadge class="secondary">{{
+          $t(`common.statuses.${object.status}`)
+        }}</BaseBadge>
 
-      <div class="ml-auto">
-        <BaseButton class="primary small">
-          <PencilIcon class="w-4 h-4" />
-          {{ $t('app.objects_list.list.edit_action') }}
-        </BaseButton>
-      </div>
-    </li>
+        <div class="ml-auto">
+          <BaseButton class="primary small" @click="navigate">
+            <PencilIcon class="w-4 h-4" />
+            {{ $t('app.objects_list.list.edit_action') }}
+          </BaseButton>
+        </div>
+      </li>
+    </RouterLink>
   </ul>
 </template>
 

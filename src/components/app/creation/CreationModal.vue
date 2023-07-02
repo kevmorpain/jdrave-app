@@ -32,6 +32,7 @@ import { useI18n } from 'vue-i18n';
 
 import type { Component } from 'vue';
 import { EEntity } from '@/types/Entity.enum';
+import { useRouter } from 'vue-router';
 
 const { t } = useI18n();
 
@@ -97,9 +98,27 @@ const handleCancel = (): void => {
   currentStep.value = 0;
 };
 
-const handleEntityCreated = (): void => {
-  handleClose();
+const router = useRouter();
 
-  // TODO: redirect to entity page
+const handleEntityCreated = (id?: string): void => {
+  if (id) {
+    switch (selectedEntity.value) {
+      case EEntity.Game:
+        // TODO: redirect to GamePage
+        break;
+      case EEntity.Object:
+        router.push({
+          name: 'object_page',
+          params: {
+            objectId: id,
+          },
+        });
+        break;
+      default:
+        break;
+    }
+  }
+
+  handleClose();
 };
 </script>

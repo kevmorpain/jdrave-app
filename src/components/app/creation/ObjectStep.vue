@@ -95,7 +95,7 @@ import { EStatus } from '@/types/Status.enum';
 
 const emit = defineEmits<{
   (e: 'cancel'): void;
-  (e: 'entity-created'): void;
+  (e: 'entity-created', id?: string): void;
 }>();
 
 const { tm } = useI18n();
@@ -167,6 +167,6 @@ const {
 }));
 
 onCreationDone(({ data }) => {
-  emit('entity-created');
+  emit('entity-created', data?.insert_objects_one.id);
 });
 </script>

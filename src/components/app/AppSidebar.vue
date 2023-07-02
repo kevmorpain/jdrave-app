@@ -96,7 +96,7 @@ const primaryNav: INavItem[] = [
     icon: UserGroupIcon,
   },
   {
-    name: 'objects',
+    name: 'objects_list',
     icon: BeakerIcon,
   },
 ];
