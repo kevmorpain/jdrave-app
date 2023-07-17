@@ -8,7 +8,7 @@
       >
         <img
           :src="object.picture_url"
-          class="max-h-[300px] w-full h-full rounded-lg bg-zinc-300 object-cover object-center"
+          class="h-[300px] w-full rounded-lg bg-zinc-300 object-cover object-center"
         />
 
         <BaseButton class="secondary" @click="triggerFileInputFocus">
@@ -36,7 +36,11 @@
 
           <div class="flex-1">
             <p>Campagne</p>
-            <BaseBadge v-for="{ game } in object.games" :key="game.id">
+            <BaseBadge
+              v-for="{ game } in object.games"
+              :key="game.id"
+              class="primary"
+            >
               {{ game.title }}
             </BaseBadge>
           </div>
@@ -62,6 +66,7 @@
 import AppCard from '@/components/app/AppCard.vue';
 
 import { ref } from 'vue';
+import { useCloudinary } from '@/plugins/cloudinary';
 import { useI18n } from 'vue-i18n';
 import { useMutation, useQuery } from '@vue/apollo-composable';
 import UpdateObjectMutation from '@/services/objects/UpdateObject.mutation.gql';
@@ -69,7 +74,7 @@ import ObjectQuery from '@/services/app/Object.query.gql';
 
 import IObject from '@/types/Object.interface';
 import IObjectQuery from '@/types/services/app/ObjectQuery.interface';
-import { useCloudinary } from '@/plugins/cloudinary';
+import { ECloudinaryFolder } from '@/plugins/cloudinary';
 
 const props = defineProps<{
   objectId: string;
@@ -100,7 +105,7 @@ const handlePictureUpload = async (event: Event): Promise<void> => {
   const file = (event.target as HTMLInputElement).files?.[0];
 
   if (file && object.value) {
-    const { url } = await uploadImage(file);
+    const { url } = await uploadImage(file, ECloudinaryFolder.Objects);
 
     object.value.picture_url = url;
   }

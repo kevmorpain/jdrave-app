@@ -1,26 +1,8 @@
+#import '@/services/characters/Character.fragment.gql'
+
 query CharacterQuery($characterId: uuid!) {
   character: characters_by_pk(id: $characterId) {
-    id
-    name
-    features
-    maxHp: max_hp
-    currentHp: current_hp
-    picture_url
-    description
-    is_npc
-    inventory
-    items {
-      id
-      character_id
-      object_id
-      name
-      bonus
-      effect
-      is_equipped
-      quantity
-      status
-      kind
-    }
+    ...Character
   }
   objects {
     id

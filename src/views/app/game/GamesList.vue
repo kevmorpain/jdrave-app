@@ -1,28 +1,28 @@
 <template>
   <header class="mb-5">
     <h1 class="font-bold text-2xl mb-4">
-      {{ $t('app.campaigns_list.title') }}
+      {{ $t('app.games_list.title') }}
     </h1>
 
     <div class="flex justify-between items-center gap-x-2">
       <BaseInput
         class="w-full max-w-[400px]"
         type="text"
-        :placeholder="$t('app.campaigns_list.search_placeholder')"
+        :placeholder="$t('app.games_list.search_placeholder')"
         v-model="searchValue"
       />
 
       <ul class="flex gap-x-4">
         <li>
           <BaseDropdown
-            :placeholder="$t('app.campaigns_list.filters.dungeon_master')"
+            :placeholder="$t('app.games_list.filters.dungeon_master')"
             :options="filters.dungeonMasters"
             v-model="selectedFilters.dungeonMasterId"
           />
         </li>
         <li>
           <BaseDropdown
-            :placeholder="$t('app.campaigns_list.filters.status')"
+            :placeholder="$t('app.games_list.filters.status')"
             :options="filters.statuses"
             v-model="selectedFilters.status"
           />
@@ -33,37 +33,46 @@
 
   <ul class="-mx-9">
     <li class="list bg-gray-100 text-gray-600 uppercase font-semibold text-sm">
-      <span class="">{{ $t('app.campaigns_list.list.header.title') }}</span>
+      <span class="">{{ $t('app.games_list.list.header.title') }}</span>
       <span class="">{{
-        $t('app.campaigns_list.list.header.dungeon_master')
+        $t('app.games_list.list.header.dungeon_master')
       }}</span>
-      <span class="">{{ $t('app.campaigns_list.list.header.last_game') }}</span>
-      <span class="">{{ $t('app.campaigns_list.list.header.status') }}</span>
+      <span class="">{{ $t('app.games_list.list.header.last_game') }}</span>
+      <span class="">{{ $t('app.games_list.list.header.status') }}</span>
       <span class=""></span>
     </li>
 
-    <li
+    <RouterLink
       v-for="game in games"
       :key="game.id"
-      class="list border-b border-gray-200"
+      custom
+      :to="{
+        name: 'game_page',
+        params: {
+          gameId: game.id,
+        },
+      }"
+      v-slot="{ navigate }"
     >
-      <div>
-        <p class="font-semibold">{{ game.title }}</p>
-        <p class="text-sm text-dark-light truncate">{{ game.description }}</p>
-      </div>
-      <span>{{ game.dungeon_master.username }}</span>
-      <span>{{ game.updated_at && $d(new Date(game.updated_at)) }}</span>
-      <BaseBadge class="secondary">{{
-        $t(`common.statuses.${game.status}`)
-      }}</BaseBadge>
+      <li class="list border-b border-gray-200">
+        <div>
+          <p class="font-semibold">{{ game.title }}</p>
+          <p class="text-sm text-dark-light truncate">{{ game.description }}</p>
+        </div>
+        <span>{{ game.dungeon_master.username }}</span>
+        <span>{{ game.updated_at && $d(new Date(game.updated_at)) }}</span>
+        <BaseBadge class="secondary">{{
+          $t(`common.statuses.${game.status}`)
+        }}</BaseBadge>
 
-      <div class="ml-auto">
-        <BaseButton class="primary small">
-          <PencilIcon class="w-4 h-4" />
-          {{ $t('app.campaigns_list.list.edit_action') }}
-        </BaseButton>
-      </div>
-    </li>
+        <div class="ml-auto">
+          <BaseButton class="primary small" @click="navigate">
+            <PencilIcon class="w-4 h-4" />
+            {{ $t('app.games_list.list.edit_action') }}
+          </BaseButton>
+        </div>
+      </li>
+    </RouterLink>
   </ul>
 </template>
 

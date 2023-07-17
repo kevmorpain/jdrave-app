@@ -1,18 +1,11 @@
+#import '@/services/games/Game.fragment.gql'
+#import '@/services/users/User.fragment.gql'
+
 query Games ($dungeonMasterId: String = null, $status: statuses_enum = null) {
-  games(where: { dungeon_master_id: { _eq: $dungeonMasterId }, status: { _eq: $status } }) {
-    id
-    title
-    description
-    status
-    created_at
-    updated_at
-    dungeon_master {
-      id
-      username
-    }
+  games(where: { dungeon_master_id: { _eq: $dungeonMasterId }, status: { _eq: $status } }, order_by: {title: asc}) {
+    ...Game
   }
   dungeon_masters: users(where: { mastered_games_aggregate: { count: { predicate: {_gte: 1} } } }) {
-    id
-    username
+    ...User
   }
 }

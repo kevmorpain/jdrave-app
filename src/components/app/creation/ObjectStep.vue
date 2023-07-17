@@ -90,6 +90,7 @@ import ObjectsQuery from '@/services/app/Objects.query.gql';
 
 import IObject, { INewObject } from '@/types/Object.interface';
 import IObjectsQuery from '@/types/services/app/ObjectsQuery.interface';
+import { ECloudinaryFolder } from '@/plugins/cloudinary';
 import { EObjectKind } from '@/types/ObjectKind.enum';
 import { EStatus } from '@/types/Status.enum';
 
@@ -122,7 +123,7 @@ const handlePictureUpload = async (event: Event): Promise<void> => {
   const file = (event.target as HTMLInputElement).files?.[0];
 
   if (file) {
-    const { url } = await uploadImage(file);
+    const { url } = await uploadImage(file, ECloudinaryFolder.Objects);
 
     newObject.value.picture_url = url;
   }

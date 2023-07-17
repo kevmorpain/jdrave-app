@@ -1,0 +1,14 @@
+#import '@/services/users/User.fragment.gql'
+
+fragment Game on games {
+  id
+  title
+  description
+  status
+  picture_url
+  created_at
+  updated_at
+  dungeon_master {
+    ...User
+  }
+}

@@ -88,7 +88,7 @@ const primaryNav: INavItem[] = [
     icon: Squares2X2Icon,
   },
   {
-    name: 'campaigns',
+    name: 'games_list',
     icon: BookOpenIcon,
   },
   {

@@ -107,7 +107,7 @@
     "nav": {
       "create_action": "Créer",
       "dashboard": "Tableau de bord",
-      "campaigns": "Campagnes",
+      "games_list": "Campagnes",
       "characters": "Personnages",
       "objects_list": "Objets",
       "profile": "Profil",
@@ -164,7 +164,7 @@
       }
     },
 
-    "campaigns_list": {
+    "games_list": {
       "title": "Campagnes",
       "search_placeholder": "Rechercher une campagne",
       "filters": {
@@ -179,6 +179,23 @@
           "status": "Statut"
         },
         "edit_action": "Éditer"
+      }
+    },
+
+    "game_page": {
+      "title": "Titre",
+      "status": "Statut",
+      "dungeon_master": "Maître du jeu",
+      "description": "Description",
+      "update_image_action": "Changer l'image",
+      "save_action": "Enregistrer les modifications",
+      "pcs": {
+        "title": "Personnages Joueurs",
+        "add_action": "Ajouter un personnage"
+      },
+      "npcs": {
+        "title": "Personnages Non Joueurs",
+        "add_action":"Ajouter un personnage"
       }
     },
     

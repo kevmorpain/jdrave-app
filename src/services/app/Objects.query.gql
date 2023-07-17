@@ -1,5 +1,5 @@
 query Objects ($kind: object_kind_enum = null, $status: statuses_enum = null) {
-  objects(where: {kind: {_eq: $kind}, status: {_eq: $status}}) {
+  objects(where: {kind: {_eq: $kind}, status: {_eq: $status}}, order_by: {name_ignore_accent: asc}) {
     id
     name
     kind

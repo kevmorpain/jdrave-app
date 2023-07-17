@@ -1,0 +1,23 @@
+fragment Character on characters {
+  id
+  name
+  description
+  features
+  maxHp: max_hp
+  currentHp: current_hp
+  picture_url
+  isNpc: is_npc
+  inventory
+  playerId: player_id
+  status
+  items {
+    id
+    name
+    bonus
+    effect
+    is_equipped
+    quantity
+    status
+    kind
+  }
+}

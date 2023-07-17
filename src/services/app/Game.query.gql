@@ -1,0 +1,14 @@
+#import '@/services/games/Game.fragment.gql'
+#import '@/services/characters/Character.fragment.gql'
+
+query Games ($gameId: uuid!) {
+  game: games_by_pk(id: $gameId) {
+    ...Game
+  }
+  npcs: characters(where: {game_id: {_eq: $gameId}, is_npc: {_eq: true}}) {
+    ...Character
+  }
+  pcs: characters(where: {game_id: {_eq: $gameId}, is_npc: {_eq: false}}) {
+    ...Character
+  }
+}

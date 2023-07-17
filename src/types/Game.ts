@@ -1,4 +1,4 @@
-import { EStatus } from "./Status.enum";
+import { EStatus } from './Status.enum';
 
 interface IUser {
   id: string;

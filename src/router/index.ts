@@ -98,14 +98,32 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: 'campagnes',
-        name: 'campaigns',
-        meta: {
-          isLayoutList: true,
-        },
         component: () =>
           import(
-            /* webpackChunkName: "app_campaigns" */ '@/views/app/CampaignsList.vue'
+            /* webpackChunkName: "app_games" */ '@/views/app/game/GameWrapper.vue'
           ),
+        children: [
+          {
+            path: '',
+            name: 'games_list',
+            meta: {
+              isLayoutList: true,
+            },
+            component: () =>
+              import(
+                /* webpackChunkName: "app_games" */ '@/views/app/game/GamesList.vue'
+              ),
+          },
+          {
+            path: ':gameId',
+            name: 'game_page',
+            props: true,
+            component: () =>
+              import(
+                /* webpackChunkName: "app_games" */ '@/views/app/game/GamePage.vue'
+              ),
+          },
+        ],
       },
       {
         path: 'personnages',

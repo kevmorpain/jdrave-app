@@ -1,0 +1,7 @@
+#import '@/services/games/Game.fragment.gql'
+
+mutation UpdateGame ($id: uuid!, $game: games_set_input!) {
+  update_games_by_pk(pk_columns: {id: $id}, _set: $game) {
+    ...Game
+  }
+}
