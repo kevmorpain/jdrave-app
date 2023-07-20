@@ -1,0 +1,15 @@
+#import '@/services/characters/Character.fragment.gql'
+#import '@/services/games/Game.fragment.gql'
+
+query Characters ($gameId: uuid = null, $status: statuses_enum = null) {
+  characters(where: { game_id: { _eq: $gameId }, status: { _eq: $status } }, order_by: {name: asc}) {
+    ...Character
+    game {
+      id
+      title
+    }
+  }
+  games(where: {characters_aggregate: {count: {predicate: {_gte: 1}}}}) {
+    ...Game
+  }
+}

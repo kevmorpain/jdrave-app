@@ -33,11 +33,11 @@
 
   <ul class="-mx-9">
     <li class="list bg-gray-100 text-gray-600 uppercase font-semibold text-sm">
-      <span class="">{{ $t('app.objects_list.list.header.name') }}</span>
-      <span class="">{{ $t('app.objects_list.list.header.games') }}</span>
-      <span class="">{{ $t('app.objects_list.list.header.kind') }}</span>
-      <span class="">{{ $t('app.objects_list.list.header.status') }}</span>
-      <span class=""></span>
+      <span>{{ $t('app.objects_list.list.header.name') }}</span>
+      <span>{{ $t('app.objects_list.list.header.games') }}</span>
+      <span>{{ $t('app.objects_list.list.header.kind') }}</span>
+      <span>{{ $t('app.objects_list.list.header.status') }}</span>
+      <span></span>
     </li>
 
     <RouterLink

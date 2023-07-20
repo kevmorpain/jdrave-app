@@ -92,7 +92,7 @@ const primaryNav: INavItem[] = [
     icon: BookOpenIcon,
   },
   {
-    name: 'characters',
+    name: 'characters_list',
     icon: UserGroupIcon,
   },
   {

@@ -108,7 +108,7 @@
       "create_action": "Créer",
       "dashboard": "Tableau de bord",
       "games_list": "Campagnes",
-      "characters": "Personnages",
+      "characters_list": "Personnages",
       "objects_list": "Objets",
       "profile": "Profil",
       "logout": "Se déconnecter"
@@ -196,6 +196,23 @@
       "npcs": {
         "title": "Personnages Non Joueurs",
         "add_action":"Ajouter un personnage"
+      }
+    },
+
+    "characters_list": {
+      "title": "Personnages",
+      "search_placeholder": "Rechercher un personnage",
+      "filters": {
+        "game": "Campagne",
+        "status": "Statut"
+      },
+      "list": {
+        "header": {
+          "name": "Nom",
+          "game": "Campagne",
+          "status": "Statut"
+        },
+        "edit_action": "Éditer"
       }
     },
     

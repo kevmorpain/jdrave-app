@@ -1,4 +1,5 @@
 import ICharacterObject from './CharacterObject.interface';
+import { EStatus } from './Status.enum';
 
 export default interface ICharacter {
   id: string;
@@ -13,4 +14,5 @@ export default interface ICharacter {
   inventory: string;
   equipment: string;
   items?: ICharacterObject[];
+  status: EStatus;
 }

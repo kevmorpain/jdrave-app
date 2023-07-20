@@ -127,14 +127,32 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: 'personnages',
-        name: 'characters',
-        meta: {
-          isLayoutList: true,
-        },
         component: () =>
           import(
-            /* webpackChunkName: "app_characters" */ '@/views/app/DashboardPage.vue'
+            /* webpackChunkName: "app_characters" */ '@/views/app/character/CharacterWrapper.vue'
           ),
+        children: [
+          {
+            path: '',
+            name: 'characters_list',
+            meta: {
+              isLayoutList: true,
+            },
+            component: () =>
+              import(
+                /* webpackChunkName: "app_characters" */ '@/views/app/character/CharactersList.vue'
+              ),
+          },
+          {
+            path: ':characterId',
+            name: 'character_page',
+            props: true,
+            component: () =>
+              import(
+                /* webpackChunkName: "app_characters" */ '@/views/app/character/CharacterPage.vue'
+              ),
+          },
+        ],
       },
       {
         path: 'objets',
